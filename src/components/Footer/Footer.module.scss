@@ -1,0 +1,13 @@
+@import '@styles/theme.scss';
+
+.footer {
+  @include header_footer_block();
+  background: $primary-green-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  img {
+    height: $max-height;
+  }
+}

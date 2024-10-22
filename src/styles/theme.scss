@@ -1,0 +1,10 @@
+@mixin header_footer_block {
+  height: $header-footer-height;
+  width: 100%;
+  padding: 10px 5%;
+  box-sizing: border-box;
+}
+
+$header-footer-height: 100px;
+$max-height: 100%;
+$primary-green-color: #18806e;

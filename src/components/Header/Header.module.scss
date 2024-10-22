@@ -1,0 +1,8 @@
+@import '@styles/theme.scss';
+
+.header {
+  @include header_footer_block();
+  img {
+    height: $max-height;
+  }
+}
