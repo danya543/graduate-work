@@ -9,11 +9,11 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./src/assets/*"],
-      "@api/*": ["./src/api/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
       "@src/types/*": ["./src/types/*"],
       "@styles/*": ["./src/styles/*"],
+      "@store/*": ["./src/store/*"],
       "@utils/*": ["./src/utils/*"]
     },
 

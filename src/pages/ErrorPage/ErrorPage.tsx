@@ -13,7 +13,7 @@ export const ErrorPage = () => {
           <h1>Error 404</h1>
           <div>
             <h3>Look like you&apos;re lost</h3>
-            <p>the page you are looking for not avaible!</p>
+            <p>The page you are looking for not avaible!</p>
             <a href="/">Home</a>
           </div>
         </div>

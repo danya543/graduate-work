@@ -37,6 +37,10 @@ export default defineConfig({
         path.dirname(url.fileURLToPath(import.meta.url)),
         'src/types',
       ),
+      '@store': path.resolve(
+        path.dirname(url.fileURLToPath(import.meta.url)),
+        'src/store',
+      ),
       '@styles': path.resolve(
         path.dirname(url.fileURLToPath(import.meta.url)),
         'src/styles',
