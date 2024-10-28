@@ -1,0 +1,17 @@
+.area {
+  width: 100%;
+  box-sizing: border-box;
+  height: 700px;
+  position: relative;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.box {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  position: relative;
+}

@@ -1,5 +1,6 @@
-import { Storages } from '@components/Storages/Storages';
-import { Form } from '@utils/Form';
+import { DragAndDropArea } from '@components/DragAndDropArea/DragAndDropArea';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import styles from './MainPage.module.scss';
 
@@ -7,8 +8,9 @@ export const MainPage = () => {
   return (
     <main className={styles.container}>
       <h1>Diploma</h1>
-      <Form placeholder={'Enter your number'} />
-      <Storages />
+      <DndProvider backend={HTML5Backend}>
+        <DragAndDropArea />
+      </DndProvider>
     </main>
   );
 };

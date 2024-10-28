@@ -25,6 +25,10 @@ export default defineConfig({
         path.dirname(url.fileURLToPath(import.meta.url)),
         'src/api',
       ),
+      '@features': path.resolve(
+        path.dirname(url.fileURLToPath(import.meta.url)),
+        'src/features',
+      ),
       '@hooks': path.resolve(
         path.dirname(url.fileURLToPath(import.meta.url)),
         'src/hooks',

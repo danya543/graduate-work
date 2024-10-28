@@ -1,0 +1,22 @@
+@import '@styles/theme.scss';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: $primary-orange-color;
+  width: 100px;
+  padding: 5px 10px;
+  border: 2px solid $secondary-gray-color;
+  border-radius: 10px;
+
+  p {
+    width: fit-content;
+  }
+  span {
+    font-size: 17px;
+    text-decoration: underline;
+  }
+}

@@ -12,20 +12,31 @@ export const Storages = () => {
     (state: RootState) => state.storage,
   );
   const [data, setData] = useState(storage.ProgramStorage);
+  const [isActive, setIsActive] = useState(true);
 
   const handleSetProgramStorage = () => {
     setData(storage.ProgramStorage);
+    setIsActive(true);
   };
 
   const handleSetDataStorage = () => {
     setData(storage.DataStorage);
+    setIsActive(false);
   };
 
   return (
     <section className={styles.container}>
-      <div>
-        <Button text={'Program Storage'} onclick={handleSetProgramStorage} />
-        <Button text={'Data Storage'} onclick={handleSetDataStorage} />{' '}
+      <div className={styles.buttons}>
+        <Button
+          text={'Program Storage'}
+          onclick={handleSetProgramStorage}
+          classname={`${isActive && styles.isActive}`}
+        />
+        <Button
+          text={'Data Storage'}
+          onclick={handleSetDataStorage}
+          classname={`${!isActive && styles.isActive}`}
+        />
       </div>
       <Storage data={data} />
     </section>
