@@ -1,0 +1,38 @@
+@import '@styles/theme.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  width: fit-content;
+  max-height: 200px;
+  overflow-y: scroll;
+  margin: 5px 0 0 5px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #ffffff;
+  }
+
+  .item {
+    padding: 0 5px;
+    border-radius: 5px;
+    width: fit-content;
+    cursor: text;
+
+    &:hover {
+      background: $primary-gray-color;
+    }
+  }
+}
