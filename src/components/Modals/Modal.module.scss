@@ -1,0 +1,83 @@
+@import '@styles/theme.scss';
+
+.form_group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+
+  h3 {
+    font-weight: 400;
+    margin-right: auto;
+  }
+
+  .saveInput{
+    outline: none;
+    box-sizing: border-box;
+    width: 90%;
+    border-radius: 7px;
+    height: 30px;
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid rgba(#000000, 0.3);
+  }
+
+  .error{
+    position: absolute;
+    color: rgb(255, 0, 0);
+    top: 60%;
+    left: 12%;
+  }
+
+  button {
+    margin-top: 20px;
+    font-size: 15px;
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid $primary-pink-color;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: rgba($primary-pink-color, 0.5);
+    }
+    &:disabled {
+      border-color: $secondary-gray-color;
+      cursor: not-allowed;
+      background: rgba($primary-gray-color, 0.5);
+    }
+  }
+
+  .options {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px 30px;
+
+    label {
+      padding: 0 2px;
+      border-radius: 5px;
+      cursor: pointer;
+      max-width: 45%;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 15px;
+
+      &:hover {
+        background: $primary-orange-color;
+      }
+
+      input{
+        cursor: pointer;
+      }
+    }
+  }
+}
+  

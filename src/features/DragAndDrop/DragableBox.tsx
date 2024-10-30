@@ -25,7 +25,8 @@ export const DraggableBox = ({
         top,
         position: 'absolute',
         opacity: isDragging ? 0.3 : 1,
-      }}>
+      }}
+    >
       <div
         ref={drag}
         style={{
@@ -36,12 +37,11 @@ export const DraggableBox = ({
           top: 0,
           right: 0,
           cursor: 'move',
+          opacity: isDragging ? 0.3 : 1,
         }}
       />
       {children}
-      <button onClick={onDelete} style={{ marginTop: '10px' }}>
-        Удалить
-      </button>
+      <button onClick={onDelete}>Удалить</button>
     </div>
   );
 };

@@ -13,17 +13,17 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@components': path.resolve(
-        path.dirname(url.fileURLToPath(import.meta.url)),
-        'src/components',
-      ),
       '@assets': path.resolve(
         path.dirname(url.fileURLToPath(import.meta.url)),
         'src/assets',
       ),
-      '@api': path.resolve(
+      '@applicationStorage': path.resolve(
         path.dirname(url.fileURLToPath(import.meta.url)),
-        'src/api',
+        'src/applicationStorage',
+      ),
+      '@components': path.resolve(
+        path.dirname(url.fileURLToPath(import.meta.url)),
+        'src/components',
       ),
       '@features': path.resolve(
         path.dirname(url.fileURLToPath(import.meta.url)),

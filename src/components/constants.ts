@@ -15,3 +15,8 @@ export const StorageRegistrTypes = {
   ACC: 'acc',
   RVH: 'temp',
 };
+
+export const ModalType = {
+  Save: 'save',
+  Load: 'load',
+};

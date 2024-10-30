@@ -7,6 +7,12 @@ export interface DraggableBoxProps {
   moveBox: (id: string, left: number, top: number) => void;
 }
 
+export interface DragableComponentsTypes {
+  PC: (id: number) => JSX.Element;
+  Storages: () => JSX.Element;
+  StorageRegistr: (text: string, value: number) => JSX.Element;
+}
+
 export interface Box {
   top: number;
   left: number;

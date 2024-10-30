@@ -1,3 +1,4 @@
+import SessionStorageService from '@applicationStorage/SessionStorage';
 import {
   CHANGE_DATASTORAGE,
   CHANGE_PROGRAMSTORAGE,
@@ -5,21 +6,7 @@ import {
   StorageState,
 } from '@src/types/Storage';
 
-const loadStateFromSessionStorage = (): StorageState => {
-  const savedState = sessionStorage.getItem('storage');
-  return savedState
-    ? JSON.parse(savedState)
-    : {
-        ProgramStorage: new Array(256).fill(0),
-        DataStorage: new Array(256).fill(0),
-      };
-};
-
-const saveStateToSessionStorage = (state: StorageState): void => {
-  sessionStorage.setItem('storage', JSON.stringify(state));
-};
-
-const initialState: StorageState = loadStateFromSessionStorage();
+const initialState: StorageState = SessionStorageService.loadState();
 
 const storageReducer = (
   state: StorageState = initialState,
@@ -37,7 +24,7 @@ const storageReducer = (
         ProgramStorage: state.ProgramStorage,
         DataStorage: state.DataStorage,
       };
-      saveStateToSessionStorage(newState);
+      SessionStorageService.saveState(newState);
       return newState;
     case CHANGE_PROGRAMSTORAGE:
       state.ProgramStorage.splice(
@@ -49,7 +36,7 @@ const storageReducer = (
         ProgramStorage: state.ProgramStorage,
         DataStorage: state.DataStorage,
       };
-      saveStateToSessionStorage(newState);
+      SessionStorageService.saveState(newState);
       return newState;
     default:
       return state;
