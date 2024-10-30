@@ -10,3 +10,13 @@ export const LogoTypes = {
   Header: 'header',
   Footer: 'footer',
 };
+
+export const StorageRegistrTypes = {
+  ACC: 'acc',
+  RVH: 'temp',
+};
+
+export const ModalType = {
+  Save: 'save',
+  Load: 'load',
+};

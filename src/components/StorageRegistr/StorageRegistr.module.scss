@@ -1,0 +1,32 @@
+@import '@styles/theme.scss';
+
+.container {
+  padding: 5px 2px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  border: 2px solid $secondary-gray-color;
+  border-radius: 10px;
+
+  &.acc {
+    background: $primary-pink-color;
+  }
+  &.temp {
+    background: $primary-gray-color;
+  }
+
+  h1 {
+    font-size: 20px;
+    text-transform: capitalize;
+  }
+
+  p {
+    padding: 0 2px;
+    background: white;
+    width: fit-content;
+    border: 2px solid $primary-gray-color;
+    border-radius: 20%;
+  }
+}
