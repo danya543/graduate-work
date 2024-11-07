@@ -44,29 +44,27 @@ export const DragAndDropArea = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}>
       <div className={styles.header}>
-        <div className={styles.addComponents}>
-          {isAcc && (
-            <Button
-              text={'ACC'}
-              onclick={() => addNewBox('StorageRegistrAcc')}
-              classname={styles.addBtn}
-            />
-          )}
-          {isTemp && (
-            <Button
-              text={'RVH'}
-              onclick={() => addNewBox('StorageRegistrTemp')}
-              classname={styles.addBtn}
-            />
-          )}
-          {isStorage && (
-            <Button
-              text={'Storages'}
-              onclick={() => addNewBox('Storages')}
-              classname={styles.addBtn}
-            />
-          )}
-        </div>
+        {isAcc && (
+          <Button
+            text={'ACC'}
+            onclick={() => addNewBox('StorageRegistrAcc')}
+            classname={styles.addBtn}
+          />
+        )}
+        {isTemp && (
+          <Button
+            text={'RVH'}
+            onclick={() => addNewBox('StorageRegistrTemp')}
+            classname={styles.addBtn}
+          />
+        )}
+        {isStorage && (
+          <Button
+            text={'Storages'}
+            onclick={() => addNewBox('Storages')}
+            classname={styles.addBtn}
+          />
+        )}
         {/* <Button
           text={'Компоненты'}
           classname={styles.showBtns}

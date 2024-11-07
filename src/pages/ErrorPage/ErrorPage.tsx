@@ -1,11 +1,14 @@
+import noconect from '@assets/no-connection.jpg';
+
 import styles from './errorPage.module.scss';
+
 export const ErrorPage = () => {
   return (
     <section className={styles.page_404}>
       <div className={styles.container}>
         <div className={styles.four_zero_four_bg}>
           <img
-            src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif"
+            src={noconect} //"https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif"
             alt="Error"
           />
         </div>

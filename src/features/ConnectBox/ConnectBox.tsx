@@ -1,4 +1,3 @@
-// src/components/MiniBlock.tsx
 import React, { useRef, useState } from 'react';
 
 const miniBlockStyle: React.CSSProperties = {
@@ -33,15 +32,15 @@ export const ConnectBox = ({
       ref={connectBoxRef}
       style={{
         ...miniBlockStyle,
-        background: miniBlockColors[miniBlockIndex], // Set color based on index
-        left: '90%', // Positioning mini-blocks to the right
-        top: `${miniBlockIndex * 30 + 15}px`, // Distributing mini-blocks vertically
+        background: miniBlockColors[miniBlockIndex],
+        left: '90%',
+        top: `${miniBlockIndex * 30 + 15}px`,
       }}
       draggable
       onDragStart={e => {
         setBeingDragged(true);
         e.dataTransfer.setData('arrow', `${boxId}-miniBlock${miniBlockIndex}`);
-        e.dataTransfer.setData('color', miniBlockColors[miniBlockIndex]); // Store color for the arrow
+        e.dataTransfer.setData('color', miniBlockColors[miniBlockIndex]);
       }}
       onDragEnd={() => {
         setBeingDragged(false);
@@ -52,7 +51,6 @@ export const ConnectBox = ({
         const draggedId = e.dataTransfer.getData('arrow');
         const color = e.dataTransfer.getData('color');
         if (!draggedId.startsWith(boxId)) {
-          // Prevent connecting to itself
           addArrow({ start: draggedId, end: id, color });
         }
       }}

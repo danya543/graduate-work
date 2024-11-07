@@ -1,4 +1,3 @@
-// store.ts
 import { combineReducers, createStore, Store } from 'redux';
 
 import accReducer from './reducers/accReducer';
