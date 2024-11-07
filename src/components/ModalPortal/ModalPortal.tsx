@@ -1,12 +1,13 @@
 import { Modal } from '@components/Modals/Modal';
-import { ModalProps } from '@src/types/Modal';
+import { ModalInfo } from '@components/Modals/ModalInfo';
+import { ModalPortalProps } from '@src/types/Modal';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './ModalPortal.module.scss';
 
-export const ModalPortal = (props: ModalProps) => {
-  const { onClose, type, boxes, setBoxes } = props;
+export const ModalPortal = (props: ModalPortalProps) => {
+  const { onClose, type, boxes, setBoxes, setInputValue } = props;
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -22,12 +23,22 @@ export const ModalPortal = (props: ModalProps) => {
         <button className={styles.modal_close} onClick={onClose}>
           &times;
         </button>
-        <Modal
-          type={type}
-          boxes={boxes}
-          setBoxes={setBoxes}
-          onClose={onClose}
-        />
+        {boxes && setBoxes ? (
+          <Modal
+            type={type}
+            boxes={boxes}
+            setBoxes={setBoxes}
+            onClose={onClose}
+          />
+        ) : (
+          setInputValue && (
+            <ModalInfo
+              type={type}
+              onClose={onClose}
+              setInputValue={setInputValue}
+            />
+          )
+        )}
       </div>
     </div>,
     document.body,

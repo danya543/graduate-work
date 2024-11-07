@@ -17,9 +17,10 @@ export const Form = ({
   const handleChangeNumSystem = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setInputValue(
-      numSystem === NumberSystem.Bin
-        ? parseInt(inputValue, 2).toString(16).toUpperCase()
-        : parseInt(inputValue, 16).toString(2),
+      inputValue &&
+        (numSystem === NumberSystem.Bin
+          ? parseInt(inputValue, 2).toString(16).toUpperCase()
+          : parseInt(inputValue, 16).toString(2)),
     );
     setNumSystem(prev =>
       prev === NumberSystem.Bin ? NumberSystem.Hex : NumberSystem.Bin,

@@ -1,10 +1,10 @@
 import SessionStorageService from '@applicationStorage/SessionStorage';
+import { StorageState } from '@src/types/Storage';
 import {
   CHANGE_DATASTORAGE,
   CHANGE_PROGRAMSTORAGE,
   StorageActionTypes,
-  StorageState,
-} from '@src/types/Storage';
+} from '@store/types';
 
 const initialState: StorageState = SessionStorageService.loadState();
 

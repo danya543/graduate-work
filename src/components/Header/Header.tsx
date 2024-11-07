@@ -1,12 +1,11 @@
-import { LogoTypes } from '@components/constants';
-import { Logo } from '@components/Logo/Logo';
-
-import styles from './Header.module.scss';
+import { DragHeader } from '@components/DragHeader/DragHeader';
+import { LogoHeader } from '@components/LogoHeader/LogoHeader';
 
 export const Header = () => {
   return (
-    <header className={styles.header}>
-      <Logo type={LogoTypes.Header} />
+    <header>
+      <LogoHeader />
+      <DragHeader />
     </header>
   );
 };

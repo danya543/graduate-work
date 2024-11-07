@@ -28,12 +28,12 @@ export const Storages = () => {
     <section className={styles.container}>
       <div className={styles.buttons}>
         <Button
-          text={'Program Storage'}
+          text={'ROM'}
           onclick={handleSetProgramStorage}
           classname={`${isActive && styles.isActive}`}
         />
         <Button
-          text={'Data Storage'}
+          text={'RAM'}
           onclick={handleSetDataStorage}
           classname={`${!isActive && styles.isActive}`}
         />
