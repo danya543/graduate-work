@@ -12,8 +12,8 @@ export const LogoTypes = {
 };
 
 export const StorageRegistrTypes = {
-  ACC: 'acc',
-  RVH: 'temp',
+  ACC: 'acc' as const,
+  RVH: 'temp' as const,
 };
 
 export const ModalType = {

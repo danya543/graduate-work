@@ -11,21 +11,15 @@ const LocalStorageService = {
       const boxesToLoad = parsedBoxes[configKey];
 
       return boxesToLoad.map(
-        (
-          box: {
-            left: number;
-            top: number;
-            type: keyof DragableComponentsTypes;
-          },
-          index: number,
-        ) => ({
+        (box: {
+          left: number;
+          top: number;
+          type: keyof DragableComponentsTypes;
+        }) => ({
           left: box.left,
           top: box.top,
           type: box.type,
-          children:
-            box.type === 'StorageRegistr'
-              ? dragableComponents[box.type]('Sample Text', 10)
-              : dragableComponents[box.type](index + 1),
+          children: dragableComponents[box.type](),
         }),
       );
     }

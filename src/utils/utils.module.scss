@@ -1,0 +1,11 @@
+.button {
+  cursor: pointer;
+  background: transparent;
+  padding: 0 5px;
+  border-radius: 5px;
+  text-transform: capitalize;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

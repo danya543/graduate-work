@@ -1,21 +1,22 @@
 import { Box } from './DragAndDrop';
 
-export interface ModalPortalCommonProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+export type ModalTypes = 'load' | 'save' | 'info';
 
 export interface ModalPortalProps {
-  isOpen: boolean;
-  type: 'load' | 'save';
-  boxes: Box[];
-  setBoxes: (loadedBoxes: Box[]) => void;
+  type: ModalTypes;
+  boxes?: Box[];
+  setBoxes?: (loadedBoxes: Box[]) => void;
   onClose: () => void;
+  setInputValue?: (value: string) => void;
 }
 
 export interface ModalProps {
-  type: 'load' | 'save';
+  type: ModalTypes;
   boxes: Box[];
   setBoxes: (loadedBoxes: Box[]) => void;
   onClose: () => void;
 }
+
+export type ModalInfoType = Required<
+  Pick<ModalPortalProps, 'type' | 'onClose' | 'setInputValue'>
+>;

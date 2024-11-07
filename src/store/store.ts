@@ -1,14 +1,24 @@
-import { StorageActionTypes } from '@src/types/Storage';
+// store.ts
 import { combineReducers, createStore, Store } from 'redux';
 
-import storageReducer from './reducers/reducers';
+import accReducer from './reducers/accReducer';
+import commandReducer from './reducers/commandReducer';
+import counterReducer from './reducers/counterReducer';
+import storageReducer from './reducers/storageReducer';
+import tempReducer from './reducers/tempReducer';
+import { AppAction } from './types';
 
 const rootReducer = combineReducers({
   storage: storageReducer,
+  counter: counterReducer,
+  acc: accReducer,
+  temp: tempReducer,
+  command: commandReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
 
-const store: Store<RootState, StorageActionTypes> = createStore(rootReducer);
+const store: Store<RootState, AppAction> = createStore(rootReducer);
 
 export default store;

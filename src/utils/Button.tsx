@@ -1,3 +1,5 @@
+import styles from './utils.module.scss';
+
 export const Button = ({
   text,
   icon,
@@ -10,7 +12,9 @@ export const Button = ({
   onclick: () => void;
 }) => {
   return (
-    <button className={`${classname && classname}`} onClick={onclick}>
+    <button
+      className={`${classname && classname} ${styles.button}`}
+      onClick={onclick}>
       {icon ? <img src={icon} alt="" /> : text}
     </button>
   );

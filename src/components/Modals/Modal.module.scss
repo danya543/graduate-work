@@ -13,7 +13,7 @@
     margin-right: auto;
   }
 
-  .saveInput{
+  .saveInput {
     outline: none;
     box-sizing: border-box;
     width: 90%;
@@ -24,7 +24,7 @@
     border: 1px solid rgba(#000000, 0.3);
   }
 
-  .error{
+  .error {
     position: absolute;
     color: rgb(255, 0, 0);
     top: 60%;
@@ -74,10 +74,13 @@
         background: $primary-orange-color;
       }
 
-      input{
+      input {
         cursor: pointer;
       }
     }
+
+    .commandBtn {
+      text-transform: none;
+    }
   }
 }
-  
