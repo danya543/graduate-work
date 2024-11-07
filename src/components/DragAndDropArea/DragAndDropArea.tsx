@@ -6,7 +6,6 @@ import { DraggableBox } from '@features/DragAndDrop/DragableBox';
 import { useDragAndDropArea } from '@hooks/useDragAndDropArea';
 import { DragableComponentsTypes } from '@src/types/DragAndDrop';
 import { Button } from '@utils/Button';
-import { useState } from 'react';
 
 import styles from './DragAndDropArea.module.scss';
 
@@ -17,11 +16,6 @@ export const dragableComponents: DragableComponentsTypes = {
 };
 
 export const DragAndDropArea = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleMainButtonClick = () => {
-    setIsOpen(prev => !prev); // Переключение состояния открытия
-  };
   const {
     boxes,
     setBoxes,
@@ -54,10 +48,7 @@ export const DragAndDropArea = () => {
           {isAcc && (
             <Button
               text={'ACC'}
-              onclick={() => {
-                setIsOpen(false);
-                addNewBox('StorageRegistrAcc');
-              }}
+              onclick={() => addNewBox('StorageRegistrAcc')}
               classname={styles.addBtn}
             />
           )}

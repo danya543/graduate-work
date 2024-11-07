@@ -45,6 +45,7 @@ export const ConnectBox = ({
       }}
       onDragEnd={() => {
         setBeingDragged(false);
+        console.log(beingDragged);
       }}
       onDragOver={e => e.preventDefault()}
       onDrop={e => {
