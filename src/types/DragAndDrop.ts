@@ -1,3 +1,7 @@
+import { Dispatch, LegacyRef, SetStateAction } from 'react';
+
+import { ModalTypes } from './Modal';
+
 export interface DraggableBoxProps {
   id: number;
   children: React.ReactNode;
@@ -8,9 +12,9 @@ export interface DraggableBoxProps {
 }
 
 export interface DragableComponentsTypes {
-  PC: (id: number) => JSX.Element;
   Storages: () => JSX.Element;
-  StorageRegistr: (text: string, value: number) => JSX.Element;
+  StorageRegistrAcc: () => JSX.Element;
+  StorageRegistrTemp: () => JSX.Element;
 }
 
 export interface Box {
@@ -19,6 +23,30 @@ export interface Box {
   type: DragableComponents;
   children: JSX.Element;
 }
-export type DragableComponents = 'PC' | 'Storages' | 'StorageRegistr';
+export type DragableComponents =
+  | 'PC'
+  | 'Storages'
+  | 'StorageRegistrAcc'
+  | 'StorageRegistrTemp';
 
 export const ItemType = 'BOX';
+
+//hook
+export interface UseDragAndDropAreaHook {
+  boxes: Box[];
+  modalType: ModalTypes | null;
+  openModal: (type: ModalTypes) => void;
+  closeModal: () => void;
+  drop: LegacyRef<HTMLDivElement> | undefined;
+  moveBox: (id: string, left: number, top: number) => void;
+  handleTouchStart: (event: React.TouchEvent) => void;
+  handleTouchMove: (event: React.TouchEvent) => void;
+  handleTouchEnd: (event: React.TouchEvent) => void;
+  addNewBox: (type: keyof DragableComponentsTypes) => void;
+  deleteBox: (id: number) => void;
+  handleClearArea: () => void;
+  setBoxes: Dispatch<SetStateAction<Box[]>>;
+  isAcc: boolean;
+  isTemp: boolean;
+  isStorage: boolean;
+}

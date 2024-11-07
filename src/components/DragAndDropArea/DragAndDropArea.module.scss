@@ -1,10 +1,11 @@
 .area {
+  margin-top: 50px;
+  position: relative;
   width: 100%;
   box-sizing: border-box;
   height: 700px;
   position: relative;
   border: 1px solid #ccc;
-  overflow: hidden;
 }
 .box {
   width: 80px;
@@ -14,4 +15,52 @@
   align-items: center;
   border-radius: 4px;
   position: relative;
+}
+.header {
+  position: absolute;
+  top: -35px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  height: 25px;
+
+  button {
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+    color: white;
+    height: 100%;
+  }
+  .addBtn {
+    background-color: #4caf50;
+  }
+  .saveBtn {
+    background-color: #ff9800;
+  }
+  .loadBtn {
+    background-color: #2196f3;
+  }
+  .clearBtn {
+    background-color: #f44336;
+  }
+  .showBtns{
+    background-color: rgb(177, 177, 0);
+  }
+  button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+
+  button:active {
+    transform: scale(0.98);
+  }
+
+  button:not(:last-child) {
+    margin-right: 10px;
+  }
 }
