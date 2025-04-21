@@ -1,0 +1,40 @@
+// CDTable.module.scss
+.container {
+  width: 100%;
+  border-collapse: collapse; // Убираем двойные границы
+  margin: 1rem 0;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+
+  th {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    position: relative;
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 25%;
+      height: 50%;
+      width: 1px;
+      background-color: #e0e0e0;
+    }
+  }
+
+  thead {
+    th {
+      background-color: #f5f5f5;
+      font-weight: 500;
+      border-bottom: 2px solid #ddd;
+    }
+  }
+
+  tbody {
+    tr:last-child {
+      th {
+        border-bottom: none;
+      }
+    }
+  }
+}

@@ -1,18 +1,25 @@
+import { SignalsStateKeys } from '@src/types/Signals';
 import {
   CHANGE_DATASTORAGE,
   CHANGE_PROGRAMSTORAGE,
+  CHANGE_SIGNALS,
   ChangeDataStorageAction,
   ChangeProgramStorageAction,
+  ChangeSignalsAction,
   CommandPayload,
   INCREMENT,
   IncrementCounterAction,
+  OPERATION,
+  OperationAction,
   RESET,
   RESET_ACC,
   RESET_COMMAND,
+  RESET_SIGNALS,
   RESET_TEMP,
   ResetAccAction,
   ResetCommandAction,
   ResetCounterAction,
+  ResetSignalsAction,
   ResetTempAction,
   SET_ACC,
   SET_COMMAND,
@@ -37,6 +44,14 @@ export const ChangeDataStorage = (
 ): ChangeDataStorageAction => ({
   type: CHANGE_DATASTORAGE,
   payload: { index, newValue },
+});
+export const AdderOperation = (
+  firstOperand: number,
+  secondOperand: number,
+  resultIndex: number,
+): OperationAction => ({
+  type: OPERATION,
+  payload: { firstOperand, secondOperand, resultIndex },
 });
 
 //counter
@@ -72,3 +87,15 @@ export const setCommand = (newValue: CommandPayload): SetCommandAction => ({
 });
 
 export const resetCommand = (): ResetCommandAction => ({ type: RESET_COMMAND });
+
+//signals
+export const changeSignal = (
+  signal: SignalsStateKeys,
+): ChangeSignalsAction => ({
+  type: CHANGE_SIGNALS,
+  payload: {
+    signal: signal,
+  },
+});
+
+export const resetSignals = (): ResetSignalsAction => ({ type: RESET_SIGNALS });

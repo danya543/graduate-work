@@ -1,3 +1,4 @@
+import { SignalsState } from '@src/types/Signals';
 import { StorageState } from '@src/types/Storage';
 import { CommandPayload } from '@store/types';
 
@@ -5,6 +6,7 @@ const SessionStorageService = {
   Storages: 'storages',
   Counter: 'counter',
   Command: 'command',
+  Signals: 'signals',
 
   loadState(): StorageState {
     const savedState = sessionStorage.getItem(this.Storages);
@@ -40,6 +42,15 @@ const SessionStorageService = {
 
   saveCommand(command: CommandPayload): void {
     sessionStorage.setItem(this.Command, JSON.stringify(command));
+  },
+
+  loadSignals(): SignalsState | null {
+    const signals = sessionStorage.getItem(this.Signals);
+    return signals ? JSON.parse(signals) : null;
+  },
+
+  saveSignals(signals: SignalsState): void {
+    sessionStorage.setItem(this.Signals, JSON.stringify(signals));
   },
 };
 

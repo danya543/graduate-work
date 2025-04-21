@@ -3,11 +3,13 @@ import { combineReducers, createStore, Store } from 'redux';
 import accReducer from './reducers/accReducer';
 import commandReducer from './reducers/commandReducer';
 import counterReducer from './reducers/counterReducer';
+import signalsReducer from './reducers/signalsReducer';
 import storageReducer from './reducers/storageReducer';
 import tempReducer from './reducers/tempReducer';
 import { AppAction } from './types';
 
 const rootReducer = combineReducers({
+  signals: signalsReducer,
   storage: storageReducer,
   counter: counterReducer,
   acc: accReducer,

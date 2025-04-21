@@ -42,7 +42,8 @@ export const DragAndDropArea = () => {
       className={styles.area}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}>
+      onTouchEnd={handleTouchEnd}
+    >
       <div className={styles.header}>
         {isAcc && (
           <Button
@@ -110,7 +111,8 @@ export const DragAndDropArea = () => {
           left={dragItem.left}
           top={dragItem.top}
           moveBox={moveBox}
-          onDelete={() => deleteBox(index)}>
+          onDelete={() => deleteBox(index)}
+        >
           {dragItem.children}
         </DraggableBox>
       ))}

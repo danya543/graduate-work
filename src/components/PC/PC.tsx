@@ -1,4 +1,9 @@
-import { increment, reset } from '@store/action/action';
+import {
+  changeSignal,
+  increment,
+  reset,
+  resetSignals,
+} from '@store/action/action';
 import { AppDispatch, RootState } from '@store/store';
 import { Button } from '@utils/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,10 +16,12 @@ export const PC = () => {
 
   const handleIncrement = () => {
     dispatch(increment());
+    dispatch(changeSignal('ADDER'));
   };
 
   const handleReset = () => {
     dispatch(reset());
+    dispatch(resetSignals());
   };
   return (
     <div className={styles.container}>

@@ -3,6 +3,7 @@ import { StorageState } from '@src/types/Storage';
 import {
   CHANGE_DATASTORAGE,
   CHANGE_PROGRAMSTORAGE,
+  OPERATION,
   StorageActionTypes,
 } from '@store/types';
 
@@ -38,6 +39,19 @@ const storageReducer = (
       };
       SessionStorageService.saveState(newState);
       return newState;
+    case OPERATION: {
+      const sign = SessionStorageService.loadSignals()?.ADDER || 0;
+      const result = eval(`
+        ${state.ProgramStorage[action.payload.firstOperand]} ${sign ? '+' : '-'}
+        ${state.ProgramStorage[action.payload.secondOperand]}`);
+      state.ProgramStorage.splice(action.payload.resultIndex, 1, result);
+      newState = {
+        ProgramStorage: state.ProgramStorage,
+        DataStorage: state.DataStorage,
+      };
+      SessionStorageService.saveState(newState);
+      return newState;
+    }
     default:
       return state;
   }
