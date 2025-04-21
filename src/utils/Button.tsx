@@ -14,8 +14,7 @@ export const Button = ({
   return (
     <button
       className={`${classname && classname} ${styles.button}`}
-      onClick={onclick}
-    >
+      onClick={onclick}>
       {icon ? <img src={icon} alt="" /> : text}
     </button>
   );

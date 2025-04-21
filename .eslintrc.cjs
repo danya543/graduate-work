@@ -7,6 +7,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
+    project: './tsconfig.json',
   },
   settings: {
     react: {
@@ -26,6 +27,7 @@ module.exports = {
     'prettier',
   ],
   plugins: ['react', '@typescript-eslint', 'simple-import-sort'],
+  ignorePatterns: ['*.d.ts'],
   rules: {
     'prettier/prettier': [
       'error',

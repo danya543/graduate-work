@@ -47,8 +47,7 @@ export const Modal = (props: ModalProps) => {
               setBoxes(loadedBoxes);
               onClose();
             }
-          }}
-        >
+          }}>
           <Form>
             <div className={styles.form_group}>
               <h3>Выберите конфигурацию:</h3>
@@ -86,8 +85,7 @@ export const Modal = (props: ModalProps) => {
               LocalStorageService.saveBoxes(values.configName, boxes);
               onClose();
             }
-          }}
-        >
+          }}>
           {({ isValid }) => (
             <Form>
               <div className={styles.form_group}>

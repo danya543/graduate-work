@@ -1,8 +1,8 @@
-import { ConnectBox } from '@features/ConnectBox/ConnectBox';
+// import { ConnectBox } from '@features/ConnectBox/ConnectBox';
 import { DraggableBoxProps, ItemType } from '@src/types/DragAndDrop';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
-import Xarrow from 'react-xarrows';
+// import Xarrow from 'react-xarrows';
 
 export const DraggableBox = ({
   id,
@@ -39,8 +39,7 @@ export const DraggableBox = ({
         top,
         position: 'absolute',
         opacity: isDragging ? 0.3 : 1,
-      }}
-    >
+      }}>
       <div
         ref={drag}
         style={{

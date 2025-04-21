@@ -69,8 +69,7 @@ export const CommandDetails = ({
         </label>
         <button
           type="submit"
-          disabled={commandTextParts[0] === 'No such command'}
-        >
+          disabled={commandTextParts[0] === 'No such command'}>
           <img src={isDisabled ? EditIcon : SaveIcon} />
         </button>
       </form>
