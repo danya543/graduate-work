@@ -37,6 +37,8 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "rollup": "^3.29.4",
+    "@rollup/rollup-linux-x64-gnu": "^3.29.4",
     "@types/node": "^22.7.8",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
