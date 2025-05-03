@@ -7,9 +7,11 @@ import {
 } from '@store/types';
 
 const initialState: SignalsState = SessionStorageService.loadSignals() ?? {
-  ACC_R: 0,
-  ACC_W: 0,
-  ADDER: 0,
+  ACC_R: [1, 0, 0, 1, 0, 1],
+  ACC_W: [0, 0, 1, 0, 1, 0],
+  RVH_R: [0, 1, 0, 0, 0, 0],
+  RVH_W: [0, 0, 0, 0, 0, 0],
+  ADDER: [0, 0, 0, 0, 1, 0],
 };
 
 const signalsReducer = (
@@ -19,17 +21,17 @@ const signalsReducer = (
   let newState: SignalsState;
   switch (action.type) {
     case CHANGE_SIGNALS:
-      newState = {
-        ...state,
-        [action.payload.signal]: state[action.payload.signal] ? 0 : 1,
-      };
+      state[action.payload.signal][state[action.payload.signal].length - 1]
+        ? state[action.payload.signal].push(0)
+        : state[action.payload.signal].push(1);
+      newState = state;
       SessionStorageService.saveSignals(newState);
-      return newState;
+      return state;
     case RESET_SIGNALS:
       newState = Object.keys(state).reduce(
         (acc, key) => ({
           ...acc,
-          [key]: 0,
+          [key]: [0],
         }),
         {} as SignalsState,
       );

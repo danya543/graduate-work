@@ -1,6 +1,4 @@
 import { Adder } from '@components/Adder/Adder';
-import { CDTable } from '@components/CDTable/CDTable';
-import { PC } from '@components/PC/PC';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -23,8 +21,7 @@ export const CDModal = (props: { onClose: () => void }) => {
         <button className={styles.modal_close} onClick={onClose}>
           &times;
         </button>
-        <PC />
-        <CDTable />
+        {/* <PC /> */}
         <Adder />
       </div>
     </div>,

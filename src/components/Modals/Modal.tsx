@@ -43,7 +43,6 @@ export const Modal = (props: ModalProps) => {
           onSubmit={() => {
             if (selectedOption) {
               const loadedBoxes = LocalStorageService.loadBoxes(selectedOption);
-              console.log(loadedBoxes);
               setBoxes(loadedBoxes);
               onClose();
             }

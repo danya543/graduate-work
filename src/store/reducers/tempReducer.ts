@@ -1,21 +1,25 @@
+import SessionStorageService from '@applicationStorage/SessionStorage';
 import { RESET_TEMP, SET_TEMP, TempActionTypes } from '@store/types';
 
-const initialTemp: number = 0;
+const storage = SessionStorageService.loadState();
+const initialTemp: number = storage.DataStorage[1];
 
 const tempReducer = (
   state: number = initialTemp,
   action: TempActionTypes,
 ): number => {
-  let newState: number;
   switch (action.type) {
     case SET_TEMP:
-      newState = action.payload.newValue;
-      return newState;
+      storage.DataStorage[1] = action.payload.newValue;
+      return storage.DataStorage[1];
     case RESET_TEMP:
-      newState = 0;
-      return newState;
-    default:
-      return state;
+      storage.DataStorage[1] = 0;
+      SessionStorageService.saveState(storage);
+      return storage.DataStorage[1];
+    default: {
+      const currentTemp = SessionStorageService.loadState()?.DataStorage?.[1];
+      return currentTemp !== undefined ? currentTemp : state;
+    }
   }
 };
 

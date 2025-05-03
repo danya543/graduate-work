@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux';
 
 import styles from './CDTable.module.scss';
 
-export const CDTable = () => {
+export const CDTable = ({
+  highlightedRow,
+}: {
+  highlightedRow: number | null;
+}) => {
   const signals = useSelector((state: RootState) => state.signals);
 
   return (
@@ -16,11 +20,15 @@ export const CDTable = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {Object.values(signals).map((item, index) => (
-            <th key={index}>{item}</th>
-          ))}
-        </tr>
+        {[0, 1, 2, 3, 4, 5].map((el, id) => (
+          <tr
+            key={id}
+            className={highlightedRow === id ? styles.highlighted : ''}>
+            {Object.values(signals).map((item, index) => (
+              <td key={index}>{item[el]}</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );

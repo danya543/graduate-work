@@ -5,16 +5,19 @@ export const Button = ({
   icon,
   classname,
   onclick,
+  disabled = false,
 }: {
   text?: string;
   icon?: string;
   classname?: string;
   onclick: () => void;
+  disabled?: boolean;
 }) => {
   return (
     <button
       className={`${classname && classname} ${styles.button}`}
-      onClick={onclick}>
+      onClick={onclick}
+      disabled={disabled}>
       {icon ? <img src={icon} alt="" /> : text}
     </button>
   );

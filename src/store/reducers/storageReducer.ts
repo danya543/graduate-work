@@ -40,11 +40,11 @@ const storageReducer = (
       SessionStorageService.saveState(newState);
       return newState;
     case OPERATION: {
-      const sign = SessionStorageService.loadSignals()?.ADDER || 0;
+      const signType = action.payload.operationType;
       const result = eval(`
-        ${state.ProgramStorage[action.payload.firstOperand]} ${sign ? '+' : '-'}
+        ${state.ProgramStorage[action.payload.firstOperand]} ${signType ? '+' : '-'}
         ${state.ProgramStorage[action.payload.secondOperand]}`);
-      state.ProgramStorage.splice(action.payload.resultIndex, 1, result);
+      state.DataStorage.splice(0, 1, result);
       newState = {
         ProgramStorage: state.ProgramStorage,
         DataStorage: state.DataStorage,

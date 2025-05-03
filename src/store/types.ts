@@ -9,7 +9,7 @@ export type ChangeStoragePayload = { index: number; newValue: number };
 export type OperationPayload = {
   firstOperand: number;
   secondOperand: number;
-  resultIndex: number;
+  operationType: 0 | 1;
 };
 
 export interface ChangeProgramStorageAction {
