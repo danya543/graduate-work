@@ -45,13 +45,9 @@ export const ChangeDataStorage = (
   type: CHANGE_DATASTORAGE,
   payload: { index, newValue },
 });
-export const AdderOperation = (
-  firstOperand: number,
-  secondOperand: number,
-  operationType: 0 | 1,
-): OperationAction => ({
+export const AdderOperation = (operationType: 0 | 1): OperationAction => ({
   type: OPERATION,
-  payload: { firstOperand, secondOperand, operationType },
+  payload: { operationType },
 });
 
 //counter

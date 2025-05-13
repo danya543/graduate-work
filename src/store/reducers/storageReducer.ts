@@ -42,9 +42,9 @@ const storageReducer = (
     case OPERATION: {
       const signType = action.payload.operationType;
       const result = eval(`
-        ${state.ProgramStorage[action.payload.firstOperand]} ${signType ? '+' : '-'}
-        ${state.ProgramStorage[action.payload.secondOperand]}`);
-      state.DataStorage.splice(0, 1, result);
+        ${state.DataStorage[50]} ${signType ? '+' : '-'}
+        ${state.DataStorage[51]}`);
+      state.DataStorage.splice(50, 1, result);
       newState = {
         ProgramStorage: state.ProgramStorage,
         DataStorage: state.DataStorage,

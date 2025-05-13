@@ -2,7 +2,7 @@ import SessionStorageService from '@applicationStorage/SessionStorage';
 import { RESET_TEMP, SET_TEMP, TempActionTypes } from '@store/types';
 
 const storage = SessionStorageService.loadState();
-const initialTemp: number = storage.DataStorage[1];
+const initialTemp: number = storage.DataStorage[51];
 
 const tempReducer = (
   state: number = initialTemp,
@@ -17,7 +17,7 @@ const tempReducer = (
       SessionStorageService.saveState(storage);
       return storage.DataStorage[1];
     default: {
-      const currentTemp = SessionStorageService.loadState()?.DataStorage?.[1];
+      const currentTemp = SessionStorageService.loadState()?.DataStorage?.[51];
       return currentTemp !== undefined ? currentTemp : state;
     }
   }

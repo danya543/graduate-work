@@ -12,6 +12,9 @@ export const LogoTypes = {
 };
 
 export const StorageRegistrTypes = {
+  R0: 'r0' as const,
+  R1: 'r1' as const,
+  R2: 'r2' as const,
   ACC: 'acc' as const,
   RVH: 'temp' as const,
 };

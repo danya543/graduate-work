@@ -11,6 +11,9 @@ import styles from './DragAndDropArea.module.scss';
 
 export const dragableComponents: DragableComponentsTypes = {
   Storages: () => <Storages />,
+  StorageRegistr0: () => <StorageRegistr text={StorageRegistrTypes.R0} />,
+  StorageRegistr1: () => <StorageRegistr text={StorageRegistrTypes.R1} />,
+  StorageRegistr2: () => <StorageRegistr text={StorageRegistrTypes.R2} />,
   StorageRegistrAcc: () => <StorageRegistr text={StorageRegistrTypes.ACC} />,
   StorageRegistrTemp: () => <StorageRegistr text={StorageRegistrTypes.RVH} />,
 };
@@ -32,6 +35,9 @@ export const DragAndDropArea = () => {
     handleClearArea,
     isAcc,
     isTemp,
+    isR0,
+    isR1,
+    isR2,
     isStorage,
   } = useDragAndDropArea();
 
@@ -55,6 +61,27 @@ export const DragAndDropArea = () => {
           <Button
             text={'RVH'}
             onclick={() => addNewBox('StorageRegistrTemp')}
+            classname={styles.addBtn}
+          />
+        )}
+        {isR0 && (
+          <Button
+            text={'R0'}
+            onclick={() => addNewBox('StorageRegistr0')}
+            classname={styles.addBtn}
+          />
+        )}
+        {isR1 && (
+          <Button
+            text={'R1'}
+            onclick={() => addNewBox('StorageRegistr1')}
+            classname={styles.addBtn}
+          />
+        )}
+        {isR2 && (
+          <Button
+            text={'R2'}
+            onclick={() => addNewBox('StorageRegistr2')}
             classname={styles.addBtn}
           />
         )}

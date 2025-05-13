@@ -13,6 +13,9 @@ export interface DraggableBoxProps {
 
 export interface DragableComponentsTypes {
   Storages: () => JSX.Element;
+  StorageRegistr0: () => JSX.Element;
+  StorageRegistr1: () => JSX.Element;
+  StorageRegistr2: () => JSX.Element;
   StorageRegistrAcc: () => JSX.Element;
   StorageRegistrTemp: () => JSX.Element;
 }
@@ -27,7 +30,10 @@ export type DragableComponents =
   | 'PC'
   | 'Storages'
   | 'StorageRegistrAcc'
-  | 'StorageRegistrTemp';
+  | 'StorageRegistrTemp'
+  | 'StorageRegistr0'
+  | 'StorageRegistr1'
+  | 'StorageRegistr2';
 
 export const ItemType = 'BOX';
 
@@ -49,4 +55,7 @@ export interface UseDragAndDropAreaHook {
   isAcc: boolean;
   isTemp: boolean;
   isStorage: boolean;
+  isR0: boolean;
+  isR1: boolean;
+  isR2: boolean;
 }

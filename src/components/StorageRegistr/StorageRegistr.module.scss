@@ -13,8 +13,15 @@
   &.acc {
     background: $primary-pink-color;
   }
+
   &.temp {
     background: $primary-gray-color;
+  }
+
+  &.r0,
+  &.r1,
+  &.r2 {
+    background: rgba(121, 121, 255, 0.5);
   }
 
   h1 {

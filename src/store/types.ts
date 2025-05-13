@@ -7,8 +7,6 @@ export const OPERATION = 'OPERATION';
 
 export type ChangeStoragePayload = { index: number; newValue: number };
 export type OperationPayload = {
-  firstOperand: number;
-  secondOperand: number;
   operationType: 0 | 1;
 };
 
@@ -79,6 +77,51 @@ export interface ResetTempAction {
 }
 
 export type TempActionTypes = SetTempAction | ResetTempAction;
+
+//r0
+export const SET_R0 = 'SET_R0';
+export const RESET_R0 = 'RESET_R0';
+
+export interface SetR0Action {
+  type: typeof SET_R0;
+  payload: StorageRegistrPayload;
+}
+
+export interface ResetR0Action {
+  type: typeof RESET_R0;
+}
+
+export type R0ActionTypes = SetR0Action | ResetR0Action;
+
+//r1
+export const SET_R1 = 'SET_R1';
+export const RESET_R1 = 'RESET_R1';
+
+export interface SetR1Action {
+  type: typeof SET_R1;
+  payload: StorageRegistrPayload;
+}
+
+export interface ResetR1Action {
+  type: typeof RESET_R1;
+}
+
+export type R1ActionTypes = SetR1Action | ResetR1Action;
+
+//r2
+export const SET_R2 = 'SET_R2';
+export const RESET_R2 = 'RESET_R2';
+
+export interface SetR2Action {
+  type: typeof SET_R2;
+  payload: StorageRegistrPayload;
+}
+
+export interface ResetR2Action {
+  type: typeof RESET_R2;
+}
+
+export type R2ActionTypes = SetR2Action | ResetR2Action;
 
 //command
 export const SET_COMMAND = 'SET_COMMAND';

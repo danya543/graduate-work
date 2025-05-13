@@ -17,7 +17,7 @@ export const CDModal = (props: { onClose: () => void }) => {
 
   return ReactDOM.createPortal(
     <div className={styles.modal_overlay}>
-      <div className={styles.modal_content}>
+      <div className={`${styles.modal_content} ${styles.CDModal}`}>
         <button className={styles.modal_close} onClick={onClose}>
           &times;
         </button>

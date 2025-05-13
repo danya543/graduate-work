@@ -96,6 +96,9 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
   const isAcc = !boxes.some(box => box.type === 'StorageRegistrAcc');
   const isTemp = !boxes.some(box => box.type === 'StorageRegistrTemp');
   const isStorage = !boxes.some(box => box.type === 'Storages');
+  const isR0 = !boxes.some(box => box.type === 'StorageRegistr0');
+  const isR1 = !boxes.some(box => box.type === 'StorageRegistr1');
+  const isR2 = !boxes.some(box => box.type === 'StorageRegistr2');
 
   return {
     boxes,
@@ -114,5 +117,8 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
     isAcc,
     isTemp,
     isStorage,
+    isR0,
+    isR1,
+    isR2,
   };
 };

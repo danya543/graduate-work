@@ -11,7 +11,15 @@ export const StorageRegistr = ({
   text: (typeof StorageRegistrTypes)[keyof typeof StorageRegistrTypes];
 }) => {
   const value = useSelector((state: RootState) =>
-    text === StorageRegistrTypes.ACC ? state.acc : state.temp,
+    text === StorageRegistrTypes.ACC
+      ? state.acc
+      : text === StorageRegistrTypes.RVH
+        ? state.temp
+        : text === StorageRegistrTypes.R0
+          ? state.r0
+          : text === StorageRegistrTypes.R1
+            ? state.r1
+            : state.r2,
   );
 
   const [, setForceUpdate] = useState(0);

@@ -5,13 +5,26 @@ import {
   RESET_SIGNALS,
   SignalsActionTypes,
 } from '@store/types';
-
-const initialState: SignalsState = SessionStorageService.loadSignals() ?? {
-  ACC_R: [1, 0, 0, 1, 0, 1],
+/**
+ * ACC_R: [1, 0, 0, 1, 0, 1],
   ACC_W: [0, 0, 1, 0, 1, 0],
   RVH_R: [0, 1, 0, 0, 0, 0],
   RVH_W: [0, 0, 0, 0, 0, 0],
-  ADDER: [0, 0, 0, 0, 1, 0],
+  ADDER: [0, 0, 1, 0, 0, 0],
+ */
+const initialState: SignalsState = SessionStorageService.loadSignals() ?? {
+  ACC_R: [0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+  ACC_W: [0, 0, 0, 1, 0, 1, 0, 1, 1, 0],
+  RVH_R: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  RVH_W: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  ADDER: [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+  ROM_R: [1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+  R0_R: [0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+  R0_W: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  R1_R: [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+  R1_W: [0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+  R2_R: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  R2_W: [0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
 };
 
 const signalsReducer = (

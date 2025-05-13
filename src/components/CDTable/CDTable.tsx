@@ -20,7 +20,7 @@ export const CDTable = ({
         </tr>
       </thead>
       <tbody>
-        {[0, 1, 2, 3, 4, 5].map((el, id) => (
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((el, id) => (
           <tr
             key={id}
             className={highlightedRow === id ? styles.highlighted : ''}>

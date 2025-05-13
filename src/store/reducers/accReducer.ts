@@ -1,7 +1,7 @@
 import SessionStorageService from '@applicationStorage/SessionStorage';
 import { AccActionTypes, RESET_ACC, SET_ACC } from '@store/types';
 
-const initialAcc: number = SessionStorageService.loadState().DataStorage[0];
+const initialAcc: number = SessionStorageService.loadState().DataStorage[50];
 
 const accReducer = (
   state: number = initialAcc,
@@ -16,7 +16,7 @@ const accReducer = (
       newState = 0;
       return newState;
     default: {
-      const currentAcc = SessionStorageService.loadState()?.DataStorage?.[0];
+      const currentAcc = SessionStorageService.loadState()?.DataStorage?.[50];
       return currentAcc !== undefined ? currentAcc : state;
     }
   }
