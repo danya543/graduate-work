@@ -1,5 +1,6 @@
-import { ModalType, StorageRegistrTypes } from '@components/constants';
+import { ModalType } from '@components/constants';
 import { ModalPortal } from '@components/ModalPortal/ModalPortal';
+import { NewRegister } from '@components/ModalPortal/NewRegister';
 import { StorageRegistr } from '@components/StorageRegistr/StorageRegistr';
 import { Storages } from '@components/Storages/Storages';
 import { DraggableBox } from '@features/DragAndDrop/DragableBox';
@@ -11,11 +12,10 @@ import styles from './DragAndDropArea.module.scss';
 
 export const dragableComponents: DragableComponentsTypes = {
   Storages: () => <Storages />,
-  StorageRegistr0: () => <StorageRegistr text={StorageRegistrTypes.R0} />,
-  StorageRegistr1: () => <StorageRegistr text={StorageRegistrTypes.R1} />,
-  StorageRegistr2: () => <StorageRegistr text={StorageRegistrTypes.R2} />,
-  StorageRegistrAcc: () => <StorageRegistr text={StorageRegistrTypes.ACC} />,
-  StorageRegistrTemp: () => <StorageRegistr text={StorageRegistrTypes.RVH} />,
+  StorageRegist: (props: {
+    text: string;
+    addresses: { current: string; from: string; to: string };
+  }) => <StorageRegistr text={props.text} addresses={props.addresses} />,
 };
 
 export const DragAndDropArea = () => {
@@ -33,12 +33,9 @@ export const DragAndDropArea = () => {
     addNewBox,
     deleteBox,
     handleClearArea,
-    isAcc,
-    isTemp,
-    isR0,
-    isR1,
-    isR2,
     isStorage,
+    isNew,
+    setIsNew,
   } = useDragAndDropArea();
 
   return (
@@ -50,39 +47,17 @@ export const DragAndDropArea = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}>
       <div className={styles.header}>
-        {isAcc && (
-          <Button
-            text={'ACC'}
-            onclick={() => addNewBox('StorageRegistrAcc')}
-            classname={styles.addBtn}
-          />
-        )}
-        {isTemp && (
-          <Button
-            text={'RVH'}
-            onclick={() => addNewBox('StorageRegistrTemp')}
-            classname={styles.addBtn}
-          />
-        )}
-        {isR0 && (
-          <Button
-            text={'R0'}
-            onclick={() => addNewBox('StorageRegistr0')}
-            classname={styles.addBtn}
-          />
-        )}
-        {isR1 && (
-          <Button
-            text={'R1'}
-            onclick={() => addNewBox('StorageRegistr1')}
-            classname={styles.addBtn}
-          />
-        )}
-        {isR2 && (
-          <Button
-            text={'R2'}
-            onclick={() => addNewBox('StorageRegistr2')}
-            classname={styles.addBtn}
+        <Button
+          text={'New register'}
+          onclick={() => setIsNew(true)}
+          classname={styles.addBtn}
+        />
+        {isNew && (
+          <NewRegister
+            onClose={() => setIsNew(false)}
+            addNewRegister={(name, value) =>
+              addNewBox('StorageRegist', { text: name, addresses: value })
+            }
           />
         )}
         {isStorage && (
@@ -92,11 +67,6 @@ export const DragAndDropArea = () => {
             classname={styles.addBtn}
           />
         )}
-        {/* <Button
-          text={'Компоненты'}
-          classname={styles.showBtns}
-          onclick={handleMainButtonClick}
-        /> */}
         <Button
           onclick={() => openModal('save')}
           text={'Сохранить'}

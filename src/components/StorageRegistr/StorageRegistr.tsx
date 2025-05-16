@@ -1,4 +1,3 @@
-import { StorageRegistrTypes } from '@components/constants';
 import { RootState } from '@store/store';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,19 +6,13 @@ import styles from './StorageRegistr.module.scss';
 
 export const StorageRegistr = ({
   text,
+  addresses,
 }: {
-  text: (typeof StorageRegistrTypes)[keyof typeof StorageRegistrTypes];
+  text: string;
+  addresses: { current: string; from: string; to: string };
 }) => {
-  const value = useSelector((state: RootState) =>
-    text === StorageRegistrTypes.ACC
-      ? state.acc
-      : text === StorageRegistrTypes.RVH
-        ? state.temp
-        : text === StorageRegistrTypes.R0
-          ? state.r0
-          : text === StorageRegistrTypes.R1
-            ? state.r1
-            : state.r2,
+  const curValue = useSelector(
+    (state: RootState) => state.storage.DataStorage[+addresses.current],
   );
 
   const [, setForceUpdate] = useState(0);
@@ -35,7 +28,9 @@ export const StorageRegistr = ({
   return (
     <div className={`${styles.container} ${styles[text]}`}>
       <h1>{text}</h1>
-      <p>{value.toString(16).padStart(2, '0')}</p>
+      <p>{curValue.toString(16).padStart(2, '0')}</p>
+      <p className={styles.from}>{addresses.from}</p>
+      <p className={styles.to}>{addresses.to}</p>
     </div>
   );
 };

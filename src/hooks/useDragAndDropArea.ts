@@ -1,6 +1,7 @@
 import { dragableComponents } from '@components/DragAndDropArea/DragAndDropArea';
 import {
   Box,
+  ComponentProps,
   DragableComponentsTypes,
   ItemType,
   UseDragAndDropAreaHook,
@@ -75,14 +76,31 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
     console.log(event);
   };
 
-  const addNewBox = (type: keyof DragableComponentsTypes) => {
+  const addNewBox = (
+    type: keyof DragableComponentsTypes,
+    props?: ComponentProps,
+  ) => {
+    const createElement = () => {
+      switch (type) {
+        case 'StorageRegist':
+          return dragableComponents[type](
+            props as {
+              text: string;
+              addresses: { current: string; from: string; to: string };
+            },
+          );
+        default:
+          return dragableComponents[type]();
+      }
+    };
+
     setBoxes(prevBoxes => [
       ...prevBoxes,
       {
         top: 20,
         left: 20,
         type,
-        children: dragableComponents[type](),
+        children: createElement(),
       },
     ]);
   };
@@ -93,12 +111,8 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
 
   const handleClearArea = () => setBoxes([]);
 
-  const isAcc = !boxes.some(box => box.type === 'StorageRegistrAcc');
-  const isTemp = !boxes.some(box => box.type === 'StorageRegistrTemp');
   const isStorage = !boxes.some(box => box.type === 'Storages');
-  const isR0 = !boxes.some(box => box.type === 'StorageRegistr0');
-  const isR1 = !boxes.some(box => box.type === 'StorageRegistr1');
-  const isR2 = !boxes.some(box => box.type === 'StorageRegistr2');
+  const [isNew, setIsNew] = useState(false);
 
   return {
     boxes,
@@ -114,11 +128,8 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
     addNewBox,
     deleteBox,
     handleClearArea,
-    isAcc,
-    isTemp,
     isStorage,
-    isR0,
-    isR1,
-    isR2,
+    isNew,
+    setIsNew,
   };
 };

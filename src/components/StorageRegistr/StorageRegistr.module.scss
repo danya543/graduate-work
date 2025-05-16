@@ -35,5 +35,17 @@
     width: fit-content;
     border: 2px solid $primary-gray-color;
     border-radius: 20%;
+
+    &.from {
+      position: absolute;
+      top: 20px;
+      left: -10px;
+    }
+
+    &.to {
+      position: absolute;
+      top: 20px;
+      right: -10px;
+    }
   }
 }

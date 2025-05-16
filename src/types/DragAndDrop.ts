@@ -13,12 +13,16 @@ export interface DraggableBoxProps {
 
 export interface DragableComponentsTypes {
   Storages: () => JSX.Element;
-  StorageRegistr0: () => JSX.Element;
-  StorageRegistr1: () => JSX.Element;
-  StorageRegistr2: () => JSX.Element;
-  StorageRegistrAcc: () => JSX.Element;
-  StorageRegistrTemp: () => JSX.Element;
+  StorageRegist: (props: {
+    text: string;
+    addresses: { current: string; from: string; to: string };
+  }) => JSX.Element;
 }
+
+export type ComponentProps = {
+  text?: string;
+  addresses?: { current: string; from: string; to: string };
+};
 
 export interface Box {
   top: number;
@@ -26,15 +30,7 @@ export interface Box {
   type: DragableComponents;
   children: JSX.Element;
 }
-export type DragableComponents =
-  | 'PC'
-  | 'Storages'
-  | 'StorageRegistrAcc'
-  | 'StorageRegistrTemp'
-  | 'StorageRegistr0'
-  | 'StorageRegistr1'
-  | 'StorageRegistr2';
-
+export type DragableComponents = 'Storages' | 'StorageRegist';
 export const ItemType = 'BOX';
 
 //hook
@@ -48,14 +44,17 @@ export interface UseDragAndDropAreaHook {
   handleTouchStart: (event: React.TouchEvent) => void;
   handleTouchMove: (event: React.TouchEvent) => void;
   handleTouchEnd: (event: React.TouchEvent) => void;
-  addNewBox: (type: keyof DragableComponentsTypes) => void;
+  addNewBox: (
+    type: keyof DragableComponentsTypes,
+    props?: {
+      text?: string;
+      addresses?: { current: string; from: string; to: string };
+    },
+  ) => void;
   deleteBox: (id: number) => void;
   handleClearArea: () => void;
   setBoxes: Dispatch<SetStateAction<Box[]>>;
-  isAcc: boolean;
-  isTemp: boolean;
   isStorage: boolean;
-  isR0: boolean;
-  isR1: boolean;
-  isR2: boolean;
+  isNew: boolean;
+  setIsNew: Dispatch<SetStateAction<boolean>>;
 }

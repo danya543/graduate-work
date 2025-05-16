@@ -1,5 +1,9 @@
 import { dragableComponents } from '@components/DragAndDropArea/DragAndDropArea';
-import { Box, DragableComponentsTypes } from '@src/types/DragAndDrop';
+import {
+  Box,
+  ComponentProps,
+  DragableComponentsTypes,
+} from '@src/types/DragAndDrop';
 
 const LocalStorageService = {
   Boxes: 'boxes',
@@ -10,16 +14,33 @@ const LocalStorageService = {
       const parsedBoxes = JSON.parse(storedBoxes);
       const boxesToLoad = parsedBoxes[configKey];
 
+      const createElement = (
+        type: keyof DragableComponentsTypes,
+        props?: ComponentProps,
+      ) => {
+        switch (type) {
+          case 'StorageRegist':
+            return dragableComponents[type](
+              props as {
+                text: string;
+                addresses: { current: string; from: string; to: string };
+              },
+            );
+          default:
+            return dragableComponents[type]();
+        }
+      };
       return boxesToLoad.map(
         (box: {
           left: number;
           top: number;
           type: keyof DragableComponentsTypes;
+          props?: ComponentProps;
         }) => ({
           left: box.left,
           top: box.top,
           type: box.type,
-          children: dragableComponents[box.type](),
+          children: createElement(box.type, box.props),
         }),
       );
     }
@@ -30,11 +51,12 @@ const LocalStorageService = {
     const savedConfig = localStorage.getItem(this.Boxes);
     const data = savedConfig ? JSON.parse(savedConfig) : {};
 
-    const serializableBoxes = boxes.map(box => ({
-      left: box.left,
-      top: box.top,
-      type: box.type,
-    }));
+    const serializableBoxes = boxes.map(box => {
+      const { left, top, type, children } = box;
+      const props =
+        (children as unknown as { props: ComponentProps })?.props ?? {};
+      return { left, top, type, props };
+    });
 
     data[name] = serializableBoxes;
     localStorage.setItem(this.Boxes, JSON.stringify(data));

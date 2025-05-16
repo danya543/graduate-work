@@ -5,33 +5,18 @@
   font-size: 0.9rem;
 
   th {
+    width: 100px;
     padding: 0.5rem 1rem;
     text-align: center;
     position: relative;
-
-    &:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 25%;
-      height: 50%;
-      width: 1px;
-      background-color: #e0e0e0;
-    }
   }
 
   td {
     text-align: center;
     position: relative;
 
-    &:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 25%;
-      height: 50%;
-      width: 1px;
-      background-color: #e0e0e0;
+    &.highlighted {
+      background: red;
     }
   }
 
@@ -44,9 +29,16 @@
   }
 
   tbody {
+    position: relative;
     tr {
-      &.highlighted {
-        background: red;
+      &:not(:first-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        background-color: #e0e0e0;
+        z-index: 1;
       }
 
       &:last-child {

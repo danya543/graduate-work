@@ -1,4 +1,4 @@
-import { Adder } from '@components/Adder/Adder';
+import { LogicHandler } from '@components/LogicHandler/LogicHandler';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -21,8 +21,7 @@ export const CDModal = (props: { onClose: () => void }) => {
         <button className={styles.modal_close} onClick={onClose}>
           &times;
         </button>
-        {/* <PC /> */}
-        <Adder />
+        <LogicHandler />
       </div>
     </div>,
     document.body,

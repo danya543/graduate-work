@@ -15,18 +15,14 @@ import {
   RESET_ACC,
   RESET_COMMAND,
   RESET_SIGNALS,
-  RESET_TEMP,
   ResetAccAction,
   ResetCommandAction,
   ResetCounterAction,
   ResetSignalsAction,
-  ResetTempAction,
   SET_ACC,
   SET_COMMAND,
-  SET_TEMP,
   SetAccAction,
   SetCommandAction,
-  SetTempAction,
 } from '@store/types';
 
 //storages
@@ -62,16 +58,6 @@ export const setAccValue = (newValue: number): SetAccAction => ({
   },
 });
 export const resetAccValue = (): ResetAccAction => ({ type: RESET_ACC });
-
-//temp
-export const setTempValue = (newValue: number): SetTempAction => ({
-  type: SET_TEMP,
-  payload: {
-    newValue,
-  },
-});
-
-export const resetTempValue = (): ResetTempAction => ({ type: RESET_TEMP });
 
 //command
 export const setCommand = (newValue: CommandPayload): SetCommandAction => ({

@@ -10,22 +10,22 @@ export const CDTable = ({
 }) => {
   const signals = useSelector((state: RootState) => state.signals);
 
+  const keys = Object.keys(signals) as (keyof typeof signals)[];
+
   return (
     <table className={styles.container}>
-      <thead>
-        <tr>
-          {Object.keys(signals).map(item => (
-            <th key={item}>{item}</th>
-          ))}
-        </tr>
-      </thead>
       <tbody>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((el, id) => (
-          <tr
-            key={id}
-            className={highlightedRow === id ? styles.highlighted : ''}>
-            {Object.values(signals).map((item, index) => (
-              <td key={index}>{item[el]}</td>
+        {keys.map(key => (
+          <tr key={key}>
+            <th>{key}</th>
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(colIndex => (
+              <td
+                key={colIndex}
+                className={
+                  highlightedRow === colIndex ? styles.highlighted : ''
+                }>
+                {signals[key][colIndex]}
+              </td>
             ))}
           </tr>
         ))}

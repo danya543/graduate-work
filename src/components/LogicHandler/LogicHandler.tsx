@@ -5,7 +5,7 @@ import { Button } from '@utils/Button';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const Adder = () => {
+export const LogicHandler = () => {
   const storage = useSelector((state: RootState) => state.storage);
   const signals = useSelector((state: RootState) => state.signals);
   const dispatch = useDispatch<AppDispatch>();
