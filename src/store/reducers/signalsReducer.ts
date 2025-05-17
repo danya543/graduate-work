@@ -1,8 +1,10 @@
 import SessionStorageService from '@applicationStorage/SessionStorage';
 import { SignalsState } from '@src/types/Signals';
 import {
+  ADD_SIGNALS,
   CHANGE_SIGNALS,
   RESET_SIGNALS,
+  SET_SIGNALS,
   SignalsActionTypes,
 } from '@store/types';
 
@@ -27,13 +29,20 @@ const signalsReducer = (
 ): SignalsState => {
   let newState: SignalsState;
   switch (action.type) {
-    case CHANGE_SIGNALS:
-      state[action.payload.signal][state[action.payload.signal].length - 1]
-        ? state[action.payload.signal].push(0)
-        : state[action.payload.signal].push(1);
-      newState = state;
+    case CHANGE_SIGNALS: {
+      const { signal, index } = action.payload;
+      const oldArray = state[signal];
+
+      const newValue = oldArray[index] === 0 ? 1 : 0;
+      const newArray = oldArray.map((val, i) => (i === index ? newValue : val));
+      newState = {
+        ...state,
+        [signal]: newArray,
+      };
+
       SessionStorageService.saveSignals(newState);
-      return state;
+      return newState;
+    }
     case RESET_SIGNALS:
       newState = Object.keys(state).reduce(
         (acc, key) => ({
@@ -44,6 +53,18 @@ const signalsReducer = (
       );
       SessionStorageService.saveSignals(newState);
       return newState;
+    case SET_SIGNALS: {
+      const newState = action.payload.signals;
+      SessionStorageService.saveSignals(newState);
+      return newState;
+    }
+    case ADD_SIGNALS:
+      newState = Object.fromEntries(
+        Object.entries(state).map(([key, arr]) => [key, [...arr, 0]]),
+      ) as SignalsState;
+      SessionStorageService.saveSignals(newState);
+      return newState;
+
     default:
       return state;
   }

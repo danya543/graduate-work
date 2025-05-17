@@ -24,11 +24,10 @@ export const StorageRegistr = ({
 
     return () => clearInterval(interval);
   }, []);
-
   return (
     <div className={`${styles.container} ${styles[text]}`}>
       <h1>{text}</h1>
-      <p>{curValue.toString(16).padStart(2, '0')}</p>
+      <p>{curValue && curValue.toString(16).padStart(2, '0')}</p>
       <p className={styles.from}>{addresses.from}</p>
       <p className={styles.to}>{addresses.to}</p>
     </div>

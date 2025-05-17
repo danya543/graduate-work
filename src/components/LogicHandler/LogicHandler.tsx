@@ -1,9 +1,17 @@
 import { CDTable } from '@components/CDTable/CDTable';
+import { baseSignals } from '@components/constants';
 import { AdderOperation, ChangeDataStorage } from '@store/action/action';
 import { AppDispatch, RootState } from '@store/store';
 import { Button } from '@utils/Button';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  baseRegisterMap,
+  getRegisterAddress,
+  getRegisterBox,
+  moveData,
+} from './utils';
 
 export const LogicHandler = () => {
   const storage = useSelector((state: RootState) => state.storage);
@@ -13,53 +21,74 @@ export const LogicHandler = () => {
   const [highlightedRow, setHighlightedRow] = useState<number | null>(0);
   const operationRef = useRef<Generator | null>(null);
 
+  const handleBaseSignalTransfer = (select: string, key: string) => {
+    const base = select.split('_')[0];
+    const dir = select.split('_')[1];
+    const regBox = getRegisterBox(key);
+    const regAddr = getRegisterAddress(regBox);
+
+    if (!regBox || regAddr === undefined) return;
+
+    if (dir === 'R') {
+      dispatch(
+        ChangeDataStorage(regAddr, storage.DataStorage[baseRegisterMap[base]]),
+      );
+    } else if (dir === 'W') {
+      dispatch(
+        ChangeDataStorage(baseRegisterMap[base], storage.DataStorage[regAddr]),
+      );
+    }
+  };
+
   function* handleOperation() {
-    setHighlightedRow(1);
-    if (signals.ROM_R[0] && signals.R0_W[0])
-      dispatch(ChangeDataStorage(0, storage.ProgramStorage[0]));
-    yield true;
+    const length = signals.ADDER.length;
+    const keys = Object.keys(signals) as (keyof typeof signals)[];
 
-    setHighlightedRow(2);
-    if (signals.R0_R[1] && signals.R1_W[1])
-      dispatch(ChangeDataStorage(1, storage.DataStorage[0]));
-    yield true;
+    for (let i = 0; i < length - 1; i++) {
+      setHighlightedRow(i + 1);
 
-    setHighlightedRow(3);
-    if (signals.ROM_R[2] && signals.R2_W[2])
-      dispatch(ChangeDataStorage(2, storage.ProgramStorage[1]));
-    yield true;
+      const activeKeys = keys
+        .flatMap(key => (signals[key][i] ? [key] : []))
+        .filter(key => key !== 'ADDER');
 
-    setHighlightedRow(4);
-    if (signals.ACC_W[3] && signals.R1_R[3])
-      dispatch(ChangeDataStorage(50, storage.DataStorage[1]));
-    yield true;
+      if (activeKeys.length === 2) {
+        const [a, b] = activeKeys;
+        const baseIncluded = baseSignals.includes(a) || baseSignals.includes(b);
 
-    setHighlightedRow(5);
-    if (signals.RVH_W[4] && signals.R2_R[4])
-      dispatch(ChangeDataStorage(51, storage.DataStorage[2]));
-    yield true;
+        if (baseIncluded) {
+          const select = baseSignals.includes(a) ? a : b;
+          const key = (baseSignals.includes(a) ? b : a).split('_')[0];
+          handleBaseSignalTransfer(select, key);
+        } else {
+          const [[k1, t1], [k2, t2]] = activeKeys.map(k => k.split('_'));
+          if (t1 === 'W' && t2 === 'R') {
+            moveData(k1, k2, dispatch, storage);
+          } else if (t1 === 'R' && t2 === 'W') {
+            moveData(k2, k1, dispatch, storage);
+          } else {
+            console.log('другие случаи');
+          }
+        }
+      }
 
-    setHighlightedRow(6);
-    if (signals.ACC_W[5]) dispatch(AdderOperation(signals.ADDER[5]));
-    yield true;
+      if (activeKeys.length === 1) {
+        const [key, type] = activeKeys[0].split('_');
+        const regBox = getRegisterBox(key);
+        const addr = getRegisterAddress(regBox);
+        if (!regBox || addr === undefined) continue;
 
-    setHighlightedRow(7);
-    if (signals.ACC_R[6] && signals.R1_W[6])
-      dispatch(ChangeDataStorage(1, storage.DataStorage[50]));
-    yield true;
+        if (type === 'W') {
+          dispatch(AdderOperation(signals.ADDER[i]));
+          dispatch(ChangeDataStorage(addr, storage.DataStorage[80]));
+        } else if (type === 'R') {
+          alert(storage.DataStorage[addr]);
+        }
+      }
 
-    setHighlightedRow(8);
-    if (signals.ACC_W[7] && signals.R0_R[7])
-      dispatch(ChangeDataStorage(50, storage.DataStorage[0]));
-    yield true;
-
-    setHighlightedRow(9);
-    if (signals.ACC_W[8]) dispatch(AdderOperation(signals.ADDER[8]));
-    yield true;
+      yield true;
+    }
 
     setHighlightedRow(null);
-    if (signals.ACC_R[9] && signals.R2_W[9])
-      dispatch(ChangeDataStorage(2, storage.DataStorage[50]));
     return true;
   }
 

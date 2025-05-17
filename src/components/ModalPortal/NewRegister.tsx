@@ -1,3 +1,4 @@
+import { InputEnRegex } from '@utils/constants';
 import { FormEvent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -17,7 +18,7 @@ export const NewRegister = (props: {
 
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    setName(value);
+    if (InputEnRegex.SaveInput.test(value) || value === '') setName(value);
   };
   const handleChangeAddress = (e: { target: { value: string } }) => {
     const { value } = e.target;
@@ -67,7 +68,7 @@ export const NewRegister = (props: {
 
   return ReactDOM.createPortal(
     <div className={styles.modal_overlay}>
-      <div className={`${styles.modal_content}`}>
+      <div className={`${styles.modal_content} ${styles.NewRegister}`}>
         <button className={styles.modal_close} onClick={onClose}>
           &times;
         </button>
@@ -117,6 +118,7 @@ export const NewRegister = (props: {
             />
           </div>
           <input
+            value={'Добавить'}
             type="submit"
             disabled={
               !name || !addresses.current || !addresses.from || !addresses.to

@@ -1,5 +1,7 @@
 import { SignalsStateKeys } from '@src/types/Signals';
 import {
+  ADD_SIGNALS,
+  AddSignalsAction,
   CHANGE_DATASTORAGE,
   CHANGE_PROGRAMSTORAGE,
   CHANGE_SIGNALS,
@@ -21,8 +23,10 @@ import {
   ResetSignalsAction,
   SET_ACC,
   SET_COMMAND,
+  SET_SIGNALS,
   SetAccAction,
   SetCommandAction,
+  SetSignalsAction,
 } from '@store/types';
 
 //storages
@@ -73,11 +77,22 @@ export const resetCommand = (): ResetCommandAction => ({ type: RESET_COMMAND });
 //signals
 export const changeSignal = (
   signal: SignalsStateKeys,
+  index: number,
 ): ChangeSignalsAction => ({
   type: CHANGE_SIGNALS,
   payload: {
     signal: signal,
+    index: index,
   },
 });
 
+export const setSignals = (signals: {
+  [K in SignalsStateKeys]: (0 | 1)[];
+}): SetSignalsAction => ({
+  type: SET_SIGNALS,
+  payload: {
+    signals: signals,
+  },
+});
+export const addSignals = (): AddSignalsAction => ({ type: ADD_SIGNALS });
 export const resetSignals = (): ResetSignalsAction => ({ type: RESET_SIGNALS });

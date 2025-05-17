@@ -85,15 +85,32 @@ export type CommandActionTypes = SetCommandAction | ResetCommandAction;
 //signals
 export const CHANGE_SIGNALS = 'CHANGE_SIGNALS';
 export const RESET_SIGNALS = 'RESET_SIGNALS';
+export const SET_SIGNALS = 'SET_SIGNALS';
+export const ADD_SIGNALS = 'ADD_SIGNALS';
 
 export interface ChangeSignalsAction {
   type: typeof CHANGE_SIGNALS;
-  payload: { signal: SignalsStateKeys };
+  payload: { signal: SignalsStateKeys; index: number };
+}
+export interface SetSignalsAction {
+  type: typeof SET_SIGNALS;
+  payload: {
+    signals: {
+      [K in SignalsStateKeys]: (0 | 1)[];
+    };
+  };
+}
+export interface AddSignalsAction {
+  type: typeof ADD_SIGNALS;
 }
 export interface ResetSignalsAction {
   type: typeof RESET_SIGNALS;
 }
-export type SignalsActionTypes = ChangeSignalsAction | ResetSignalsAction;
+export type SignalsActionTypes =
+  | ChangeSignalsAction
+  | ResetSignalsAction
+  | SetSignalsAction
+  | AddSignalsAction;
 
 //all types
 export type AppAction =

@@ -17,3 +17,7 @@ export const NumberSystemRegex = {
 export const InputRegex = {
   SaveInput: /^[A-ZА-Яa-zа-я0-9_-]+$/,
 };
+
+export const InputEnRegex = {
+  SaveInput: /^[A-Za-z0-9]+$/,
+};

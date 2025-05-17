@@ -1,3 +1,4 @@
+import LocalStorageService from '@applicationStorage/LocalStorage';
 import { dragableComponents } from '@components/DragAndDropArea/DragAndDropArea';
 import {
   Box,
@@ -7,7 +8,7 @@ import {
   UseDragAndDropAreaHook,
 } from '@src/types/DragAndDrop';
 import { ModalTypes } from '@src/types/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 
 export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
@@ -16,6 +17,15 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
 
   const openModal = (type: ModalTypes) => setModalType(type);
   const closeModal = () => setModalType(null);
+
+  useEffect(() => {
+    LocalStorageService.saveBoxes('last_work', boxes);
+  }, [boxes]);
+
+  useEffect(() => {
+    const savedBoxes = LocalStorageService.loadBoxes('last_work');
+    if (savedBoxes) setBoxes(savedBoxes);
+  }, []);
 
   const [, drop] = useDrop(() => ({
     accept: ItemType,

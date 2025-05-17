@@ -14,7 +14,7 @@ export const Storages = () => {
   const storage: StorageState = useSelector(
     (state: RootState) => state.storage,
   );
-  const [data, setData] = useState(storage.ProgramStorage);
+  const [data, setData] = useState(storage.DataStorage);
   const [isActive, setIsActive] = useState(true);
   SessionStorageService.saveState(storage);
 
@@ -27,31 +27,32 @@ export const Storages = () => {
 
   const handleSetProgramStorage = () => {
     setData(storage.ProgramStorage);
-    setIsActive(true);
+    setIsActive(false);
   };
 
   const handleSetDataStorage = () => {
     setData(storage.DataStorage);
-    setIsActive(false);
+    setIsActive(true);
   };
 
   return (
     <section className={styles.container}>
       <div className={styles.buttons}>
         <Button
-          text={'ROM'}
-          onclick={handleSetProgramStorage}
+          text={'RAM'}
+          onclick={handleSetDataStorage}
           classname={`${isActive && styles.isActive}`}
         />
         <Button
-          text={'RAM'}
-          onclick={handleSetDataStorage}
+          text={'ROM'}
+          onclick={handleSetProgramStorage}
           classname={`${!isActive && styles.isActive}`}
         />
       </div>
       <Storage
         data={data}
-        handleInput={isActive ? handleInputProgram : handleInputData}
+        handleInput={isActive ? handleInputData : handleInputProgram}
+        isRam={isActive}
       />
     </section>
   );

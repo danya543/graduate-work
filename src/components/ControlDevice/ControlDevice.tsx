@@ -9,7 +9,7 @@ export const ControlDevice = () => {
   };
   return (
     <div>
-      <Button text={'Control table'} onclick={() => setIsOpen(true)} />
+      <Button text={'Управляющее устройство'} onclick={() => setIsOpen(true)} />
       {isOpen && <CDModal onClose={closeModal} />}
     </div>
   );
