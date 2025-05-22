@@ -5,11 +5,9 @@ import styles from './Storage.module.scss';
 export const Storage = ({
   data,
   handleInput,
-  isRam,
 }: {
   data: number[];
   handleInput: (index: number, value: number) => void;
-  isRam: boolean;
 }) => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editedValue, setEditedValue] = useState<string>('');
@@ -61,15 +59,7 @@ export const Storage = ({
       {data.map((item, index) => (
         <div
           key={index}
-          className={`${styles.item} ${
-            isRam
-              ? index === 80
-                ? styles.acc
-                : index === 81
-                  ? styles.rvh
-                  : ''
-              : ''
-          }`}
+          className={`${styles.item}`}
           onClick={() => handleCellClick(index, item)}>
           {editingIndex === index ? (
             <input

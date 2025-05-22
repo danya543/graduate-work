@@ -1,3 +1,4 @@
+import { LogicProvider } from '@components/context/LogicProvider';
 import { DragAndDropArea } from '@components/DragAndDropArea/DragAndDropArea';
 import { DragHeader } from '@components/DragHeader/DragHeader';
 import { useIsMobile } from '@hooks/useIsMobile';
@@ -21,7 +22,9 @@ export const MainPage = () => {
   return (
     <main className={styles.container}>
       <h1>Diploma</h1>
-      <DragHeader />
+      <LogicProvider>
+        <DragHeader />
+      </LogicProvider>
       <DndProvider backend={HTML5Backend}>
         <DragAndDropArea />
       </DndProvider>

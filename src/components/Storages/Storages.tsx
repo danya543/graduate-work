@@ -52,7 +52,6 @@ export const Storages = () => {
       <Storage
         data={data}
         handleInput={isActive ? handleInputData : handleInputProgram}
-        isRam={isActive}
       />
     </section>
   );

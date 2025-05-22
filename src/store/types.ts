@@ -8,6 +8,8 @@ export const OPERATION = 'OPERATION';
 export type ChangeStoragePayload = { index: number; newValue: number };
 export type OperationPayload = {
   operationType: 0 | 1;
+  firstValueIndex: number;
+  secondValueIndex: number;
 };
 
 export interface ChangeProgramStorageAction {

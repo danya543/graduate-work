@@ -33,8 +33,3 @@ export const getRegisterBox = (key: string) => {
 
 export const getRegisterAddress = (box: Box | undefined) =>
   box?.children?.props?.addresses?.current;
-
-export const baseRegisterMap: Record<string, number> = {
-  ACC: 80,
-  RVH: 81,
-};

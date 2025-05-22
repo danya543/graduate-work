@@ -74,10 +74,10 @@ export const NewRegister = (props: {
         </button>
         <form onSubmit={submitHandler}>
           <div className={styles.inputBlock}>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Название регистра</label>
             <input
               type="text"
-              placeholder={'name'}
+              placeholder={'Название регистра'}
               value={name}
               onChange={handleChangeName}
               maxLength={5}
@@ -85,10 +85,10 @@ export const NewRegister = (props: {
             />
           </div>
           <div className={styles.inputBlock}>
-            <label htmlFor="ram address">Ram address</label>
+            <label htmlFor="ram address">Адрес регистра</label>
             <input
               type="text"
-              placeholder={'ram address'}
+              placeholder={'Адрес регистра'}
               value={addresses.current}
               onChange={handleChangeAddress}
               maxLength={3}
@@ -96,10 +96,10 @@ export const NewRegister = (props: {
             />
           </div>
           <div className={styles.inputBlock}>
-            <label htmlFor="from address">From address</label>
+            <label htmlFor="from address">Адрес откуда брать данные</label>
             <input
               type="text"
-              placeholder={'from address'}
+              placeholder={'Адрес откуда брать данные'}
               value={addresses.from}
               onChange={handleChangeFromAddress}
               maxLength={3}
@@ -107,10 +107,10 @@ export const NewRegister = (props: {
             />
           </div>
           <div className={styles.inputBlock}>
-            <label htmlFor="to address">To address</label>
+            <label htmlFor="to address">Адрес куда записывать данные</label>
             <input
               type="text"
-              placeholder={'to address'}
+              placeholder={'Адрес куда записывать данные'}
               value={addresses.to}
               onChange={handleChangeToAddress}
               maxLength={3}

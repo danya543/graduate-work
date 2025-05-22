@@ -39,8 +39,4 @@ export const initialSignals: SignalsState = Object.fromEntries([
     return [[box.type, Array(1).fill(0)]];
   }),
   ['ADDER', Array(1).fill(0)],
-  ['ACC_R', Array(1).fill(0)],
-  ['ACC_W', Array(1).fill(0)],
-  ['RVH_R', Array(1).fill(0)],
-  ['RVH_W', Array(1).fill(0)],
 ]);

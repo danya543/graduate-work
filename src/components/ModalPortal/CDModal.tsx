@@ -1,4 +1,4 @@
-import { LogicHandler } from '@components/LogicHandler/LogicHandler';
+import { LogicHandlerView } from '@components/LogicHandler/LogicHandlerView';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -21,7 +21,7 @@ export const CDModal = (props: { onClose: () => void }) => {
         <button className={styles.modal_close} onClick={onClose}>
           &times;
         </button>
-        <LogicHandler />
+        <LogicHandlerView />
       </div>
     </div>,
     document.body,
