@@ -15,10 +15,12 @@ import { getRegisterAddress, getRegisterBox, moveData } from './utils';
 export type LogicHandlerRef = {
   handleNext: () => void;
   getCurrentStep: () => number | null;
+  restart: () => void;
 };
 type LogicHandlerProps = {
   onStepChange?: (step: number | null) => void;
   initialStep?: number | null;
+  restart: () => void;
 };
 
 export const LogicHandler = forwardRef<LogicHandlerRef, LogicHandlerProps>(
@@ -114,9 +116,15 @@ export const LogicHandler = forwardRef<LogicHandlerRef, LogicHandlerProps>(
       }
     };
 
+    const restart = () => {
+      operationRef.current = null;
+      setHighlightedRow(0);
+    };
+
     useImperativeHandle(ref, () => ({
       handleNext,
       getCurrentStep: () => initialStep,
+      restart,
     }));
 
     return null;

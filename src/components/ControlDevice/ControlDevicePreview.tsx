@@ -1,17 +1,20 @@
 // ControlDevicePreview.tsx
 import { useLogicContext } from '@components/context/LogicContext';
 import { RootState } from '@store/store';
+import { Button } from '@utils/Button';
 import { useSelector } from 'react-redux';
+
+import styles from './ControlDevicePreview.module.scss';
 
 export const ControlDevicePreview = () => {
   const { currentStep, handleNext } = useLogicContext();
   const signals = useSelector((state: RootState) => state.signals);
 
-  if (currentStep === null) return null;
+  if (currentStep === null) return <div>Программа окончена</div>;
   const signalEntries = Object.entries(signals);
 
   return (
-    <div>
+    <div className={styles.preview}>
       <h4>Текущие сигналы (шаг {currentStep})</h4>
       <table>
         <tbody>
@@ -27,7 +30,11 @@ export const ControlDevicePreview = () => {
           </tr>
         </tbody>
       </table>
-      <button onClick={handleNext}>Следующий шаг</button>
+      <Button
+        onclick={handleNext}
+        text={'Следующий шаг'}
+        classname={styles.next}
+      />
     </div>
   );
 };

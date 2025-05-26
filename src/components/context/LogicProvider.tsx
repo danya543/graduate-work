@@ -14,19 +14,24 @@ export const LogicProvider = ({ children }: { children: React.ReactNode }) => {
     logicRef.current?.handleNext();
   };
 
+  const restartProg = () => {
+    logicRef.current?.restart();
+  };
+
   useEffect(() => {
     const step = logicRef.current?.getCurrentStep();
     setCurrentStep(step ?? 0);
   }, []);
 
   return (
-    <LogicContext.Provider value={{ handleNext, currentStep }}>
+    <LogicContext.Provider value={{ handleNext, currentStep, restartProg }}>
       {children}
       <div style={{ display: 'none' }}>
         <LogicHandler
           ref={logicRef}
           onStepChange={setCurrentStep}
           initialStep={currentStep}
+          restart={restartProg}
         />
       </div>
     </LogicContext.Provider>
