@@ -1,6 +1,7 @@
 import LocalStorageService from '@applicationStorage/LocalStorage';
 import SessionStorageService from '@applicationStorage/SessionStorage';
-import { generateSignalsFromBoxes } from '@components/constants';
+import { areKeysEqual, generateSignalsFromBoxes } from '@components/constants';
+import { useLogicContext } from '@components/context/LogicContext';
 import { addSignals, changeSignal, setSignals } from '@store/action/action';
 import { AppDispatch, RootState } from '@store/store';
 import { Button } from '@utils/Button';
@@ -14,6 +15,7 @@ export const CDTable = ({
 }: {
   highlightedRow: number | null;
 }) => {
+  const { restartProg } = useLogicContext();
   const dispatch = useDispatch<AppDispatch>();
   const signals = useSelector((state: RootState) => state.signals);
   const prevSerializedBoxesRef = useRef<string | null>(null);
@@ -22,25 +24,22 @@ export const CDTable = ({
 
   useEffect(() => {
     const savedSignals = SessionStorageService.loadSignals();
-    if (savedSignals) {
+    const currentBoxes = LocalStorageService.loadBoxes('last_work');
+    const currentSerialized = JSON.stringify(currentBoxes);
+
+    if (prevSerializedBoxesRef.current !== currentSerialized) {
+      prevSerializedBoxesRef.current = currentSerialized;
+    }
+
+    const generatedSignals = generateSignalsFromBoxes();
+
+    if (savedSignals && areKeysEqual(savedSignals, generatedSignals)) {
       dispatch(setSignals(savedSignals));
+    } else {
+      dispatch(setSignals(generatedSignals));
+      restartProg();
     }
   }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const currentBoxes = LocalStorageService.loadBoxes('last_work');
-      const currentSerialized = JSON.stringify(currentBoxes);
-
-      if (prevSerializedBoxesRef.current !== currentSerialized) {
-        prevSerializedBoxesRef.current = currentSerialized;
-        const updatedSignals = generateSignalsFromBoxes();
-        dispatch(setSignals(updatedSignals));
-      }
-    }, 500); // Проверяем каждые 500мс
-
-    return () => clearInterval(interval);
-  }, [dispatch]);
 
   return (
     <div>

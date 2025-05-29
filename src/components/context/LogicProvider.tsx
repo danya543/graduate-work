@@ -1,7 +1,5 @@
-import {
-  LogicHandler,
-  LogicHandlerRef,
-} from '@components/LogicHandler/LogicHandler';
+import { LogicHandler } from '@components/LogicHandler/LogicHandler';
+import { LogicHandlerRef } from '@src/types/LogicHandler';
 import { useEffect, useRef, useState } from 'react';
 
 import { LogicContext } from './LogicContext';

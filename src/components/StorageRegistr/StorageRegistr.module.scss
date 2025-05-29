@@ -9,6 +9,7 @@
   align-items: center;
   border: 2px solid $secondary-gray-color;
   border-radius: 10px;
+  background: white;
 
   &.acc {
     background: $primary-pink-color;
@@ -16,12 +17,6 @@
 
   &.temp {
     background: $primary-gray-color;
-  }
-
-  &.r0,
-  &.r1,
-  &.r2 {
-    background: rgba(121, 121, 255, 0.5);
   }
 
   h1 {
@@ -36,16 +31,10 @@
     border: 2px solid $primary-gray-color;
     border-radius: 20%;
 
-    &.from {
+    &.data_bus {
       position: absolute;
-      top: 20px;
-      left: -10px;
-    }
-
-    &.to {
-      position: absolute;
-      top: 20px;
-      right: -10px;
+      top: 0;
+      left: 0;
     }
   }
 }

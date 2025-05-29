@@ -14,7 +14,7 @@ export const dragableComponents: DragableComponentsTypes = {
   Storages: () => <Storages />,
   StorageRegist: (props: {
     text: string;
-    addresses: { current: string; from: string; to: string };
+    addresses: { current: string; data_bus: string };
   }) => <StorageRegistr text={props.text} addresses={props.addresses} />,
 };
 

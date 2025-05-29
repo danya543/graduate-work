@@ -9,7 +9,7 @@ export const StorageRegistr = ({
   addresses,
 }: {
   text: string;
-  addresses: { current: string; from: string; to: string };
+  addresses: { current: string; data_bus: string };
 }) => {
   const curValue = useSelector(
     (state: RootState) => state.storage.DataStorage[+addresses.current],
@@ -28,8 +28,7 @@ export const StorageRegistr = ({
     <div className={`${styles.container} ${styles[text]}`}>
       <h1>{text}</h1>
       <p>{curValue && curValue.toString(16).padStart(2, '0')}</p>
-      <p className={styles.from}>{addresses.from}</p>
-      <p className={styles.to}>{addresses.to}</p>
+      <p className={styles.data_bus}>{addresses.data_bus}</p>
     </div>
   );
 };

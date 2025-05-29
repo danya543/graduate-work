@@ -8,6 +8,10 @@ export const Images = {
   Black_Logo: BlackLogoIcon,
 };
 
+export const ERROR_MSG = {
+  data_bus: 'Ошибка! Шины данных не совпадают',
+};
+
 export const LogoTypes = {
   Header: 'header',
   Footer: 'footer',
@@ -18,7 +22,14 @@ export const ModalType = {
   Load: 'load',
 };
 
-export const baseSignals = ['ACC_R', 'RVH_R', 'ACC_W', 'RVH_W'];
+export const areKeysEqual = (a: object, b: object): boolean => {
+  const aKeys = Object.keys(a).sort();
+  const bKeys = Object.keys(b).sort();
+
+  if (aKeys.length !== bKeys.length) return false;
+
+  return aKeys.every((key, index) => key === bKeys[index]);
+};
 
 export const generateSignalsFromBoxes = (): SignalsState => {
   const currentBoxes = LocalStorageService.loadBoxes('last_work');
@@ -26,7 +37,9 @@ export const generateSignalsFromBoxes = (): SignalsState => {
   return Object.fromEntries([
     ...currentBoxes.flatMap(box => {
       if (box.type === 'Storages') {
-        return [['ROM_R', Array(1).fill(0)]];
+        return [
+          /* ['ROM_R', Array(1).fill(0)] */
+        ];
       }
 
       if (box.type === 'StorageRegist' && 'props' in box.children) {

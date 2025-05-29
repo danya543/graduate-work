@@ -8,13 +8,13 @@ export const NewRegister = (props: {
   onClose: () => void;
   addNewRegister: (
     name: string,
-    addresses: { current: string; from: string; to: string },
+    addresses: { current: string; data_bus: string },
   ) => void;
 }) => {
   const { onClose, addNewRegister } = props;
 
   const [name, setName] = useState('');
-  const [addresses, setAddresses] = useState({ current: '', from: '', to: '' });
+  const [addresses, setAddresses] = useState({ current: '', data_bus: '' });
 
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
@@ -34,20 +34,10 @@ export const NewRegister = (props: {
     const { value } = e.target;
     const num = Number(value);
     if (!Number.isNaN(num) && num >= 0 && num <= 255) {
-      setAddresses(prev => ({ ...prev, from: value }));
+      setAddresses(prev => ({ ...prev, data_bus: value }));
     }
     if (value === '') {
-      setAddresses(prev => ({ ...prev, from: '' }));
-    }
-  };
-  const handleChangeToAddress = (e: { target: { value: string } }) => {
-    const { value } = e.target;
-    const num = Number(value);
-    if (!Number.isNaN(num) && num >= 0 && num <= 255) {
-      setAddresses(prev => ({ ...prev, to: value }));
-    }
-    if (value === '') {
-      setAddresses(prev => ({ ...prev, to: '' }));
+      setAddresses(prev => ({ ...prev, data_bus: '' }));
     }
   };
 
@@ -96,33 +86,20 @@ export const NewRegister = (props: {
             />
           </div>
           <div className={styles.inputBlock}>
-            <label htmlFor="from address">Адрес откуда брать данные</label>
+            <label htmlFor="data_bus address">Шина данных</label>
             <input
               type="text"
-              placeholder={'Адрес откуда брать данные'}
-              value={addresses.from}
+              placeholder={'Шина данных'}
+              value={addresses.data_bus}
               onChange={handleChangeFromAddress}
-              maxLength={3}
-              name="from address"
-            />
-          </div>
-          <div className={styles.inputBlock}>
-            <label htmlFor="to address">Адрес куда записывать данные</label>
-            <input
-              type="text"
-              placeholder={'Адрес куда записывать данные'}
-              value={addresses.to}
-              onChange={handleChangeToAddress}
-              maxLength={3}
-              name="to address"
+              maxLength={1}
+              name="data_bus address"
             />
           </div>
           <input
             value={'Добавить'}
             type="submit"
-            disabled={
-              !name || !addresses.current || !addresses.from || !addresses.to
-            }
+            disabled={!name || !addresses.current || !addresses.data_bus}
           />
         </form>
       </div>

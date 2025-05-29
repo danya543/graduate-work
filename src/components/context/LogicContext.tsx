@@ -1,10 +1,5 @@
+import { LogicContextType } from '@src/types/LogicHandler';
 import { createContext, useContext } from 'react';
-
-type LogicContextType = {
-  handleNext: () => void;
-  currentStep: number | null;
-  restartProg: () => void;
-};
 
 export const LogicContext = createContext<LogicContextType | null>(null);
 

@@ -23,7 +23,7 @@ const LocalStorageService = {
             return dragableComponents[type](
               props as {
                 text: string;
-                addresses: { current: string; from: string; to: string };
+                addresses: { current: string; data_bus: string };
               },
             );
           default:

@@ -15,13 +15,13 @@ export interface DragableComponentsTypes {
   Storages: () => JSX.Element;
   StorageRegist: (props: {
     text: string;
-    addresses: { current: string; from: string; to: string };
+    addresses: { current: string; data_bus: string };
   }) => JSX.Element;
 }
 
 export type ComponentProps = {
   text?: string;
-  addresses?: { current: string; from: string; to: string };
+  addresses?: { current: string; data_bus: string };
 };
 
 export interface Box {
@@ -48,7 +48,7 @@ export interface UseDragAndDropAreaHook {
     type: keyof DragableComponentsTypes,
     props?: {
       text?: string;
-      addresses?: { current: string; from: string; to: string };
+      addresses?: { current: string; data_bus: string };
     },
   ) => void;
   deleteBox: (id: number) => void;
