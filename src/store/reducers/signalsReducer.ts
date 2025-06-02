@@ -11,6 +11,7 @@ import {
 
 const initialState: SignalsState = SessionStorageService.loadSignals() ?? {
   ADDER: [0],
+  PLUS_RAND: [0],
 };
 
 const signalsReducer = (

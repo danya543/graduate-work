@@ -66,6 +66,7 @@ export function processBusSignals(
         dispatch(
           AdderOperation(
             signal.ADDER[step],
+            signal.PLUS_RAND[step],
             getRegisterAddress(regBox_R1),
             getRegisterAddress(regBox_R2),
           ),

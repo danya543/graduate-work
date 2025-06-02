@@ -43,7 +43,8 @@ const storageReducer = (
       const signType = action.payload.operationType;
       const result = eval(`
         ${state.DataStorage[action.payload.firstValueIndex]} ${signType ? '+' : '-'}
-        ${state.DataStorage[action.payload.secondValueIndex]}`);
+        ${state.DataStorage[action.payload.secondValueIndex]} 
+        ${action.payload.extraSignal ? '+' + (Math.floor(Math.random() * 100) + 1) : ''}`);
       state.DataStorage.splice(action.payload.firstValueIndex, 1, result);
       newState = {
         ProgramStorage: state.ProgramStorage,

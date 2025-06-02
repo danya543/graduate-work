@@ -53,5 +53,6 @@ export const generateSignalsFromBoxes = (): SignalsState => {
       return [[box.type, Array(1).fill(0)]];
     }),
     ['ADDER', Array(1).fill(0)],
+    ['PLUS_RAND', Array(1).fill(0)],
   ]);
 };

@@ -48,7 +48,7 @@ export const DragAndDropArea = () => {
       onTouchEnd={handleTouchEnd}>
       <div className={styles.header}>
         <Button
-          text={'New register'}
+          text={'Добавить регистр'}
           onclick={() => setIsNew(true)}
           classname={styles.addBtn}
         />
@@ -62,7 +62,7 @@ export const DragAndDropArea = () => {
         )}
         {isStorage && (
           <Button
-            text={'Storages'}
+            text={'Добавить память'}
             onclick={() => addNewBox('Storages')}
             classname={styles.addBtn}
           />

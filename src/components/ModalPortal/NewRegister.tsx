@@ -66,34 +66,34 @@ export const NewRegister = (props: {
           <div className={styles.inputBlock}>
             <label htmlFor="name">Название регистра</label>
             <input
+              id="name"
               type="text"
               placeholder={'Название регистра'}
               value={name}
               onChange={handleChangeName}
               maxLength={5}
-              name="name"
             />
           </div>
           <div className={styles.inputBlock}>
-            <label htmlFor="ram address">Адрес регистра</label>
+            <label htmlFor="ram_address">Адрес регистра</label>
             <input
+              id="ram_address"
               type="text"
               placeholder={'Адрес регистра'}
               value={addresses.current}
               onChange={handleChangeAddress}
               maxLength={3}
-              name="ram address"
             />
           </div>
           <div className={styles.inputBlock}>
-            <label htmlFor="data_bus address">Шина данных</label>
+            <label htmlFor="data_bus_address">Шина данных</label>
             <input
+              id="data_bus_address"
               type="text"
               placeholder={'Шина данных'}
               value={addresses.data_bus}
               onChange={handleChangeFromAddress}
               maxLength={1}
-              name="data_bus address"
             />
           </div>
           <input

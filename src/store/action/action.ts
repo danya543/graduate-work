@@ -49,11 +49,12 @@ export const ChangeDataStorage = (
 });
 export const AdderOperation = (
   operationType: 0 | 1,
+  extraSignal: 0 | 1,
   firstValueIndex: number,
   secondValueIndex: number,
 ): OperationAction => ({
   type: OPERATION,
-  payload: { operationType, firstValueIndex, secondValueIndex },
+  payload: { operationType, firstValueIndex, secondValueIndex, extraSignal },
 });
 
 //counter

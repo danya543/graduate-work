@@ -37,7 +37,9 @@ export const useLogicHandler = (
       setHighlightedRow(i + 1);
       onStepChange?.(i + 1);
 
-      const activeKeys = keys.filter(key => signals[key][i] && key !== 'ADDER');
+      const activeKeys = keys.filter(
+        key => signals[key][i] && key !== 'ADDER' && key !== 'PLUS_RAND',
+      );
 
       const dataBusMap: Record<string, string[]> = {};
 
