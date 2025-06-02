@@ -89,6 +89,7 @@ export const CHANGE_SIGNALS = 'CHANGE_SIGNALS';
 export const RESET_SIGNALS = 'RESET_SIGNALS';
 export const SET_SIGNALS = 'SET_SIGNALS';
 export const ADD_SIGNALS = 'ADD_SIGNALS';
+export const REMOVE_LAST_SIGNAL = 'REMOVE_LAST_SIGNAL';
 
 export interface ChangeSignalsAction {
   type: typeof CHANGE_SIGNALS;
@@ -105,6 +106,9 @@ export interface SetSignalsAction {
 export interface AddSignalsAction {
   type: typeof ADD_SIGNALS;
 }
+export interface RemoveLastSignalAction {
+  type: typeof REMOVE_LAST_SIGNAL;
+}
 export interface ResetSignalsAction {
   type: typeof RESET_SIGNALS;
 }
@@ -112,7 +116,8 @@ export type SignalsActionTypes =
   | ChangeSignalsAction
   | ResetSignalsAction
   | SetSignalsAction
-  | AddSignalsAction;
+  | AddSignalsAction
+  | RemoveLastSignalAction;
 
 //all types
 export type AppAction =

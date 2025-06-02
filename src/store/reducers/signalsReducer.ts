@@ -3,6 +3,7 @@ import { SignalsState } from '@src/types/Signals';
 import {
   ADD_SIGNALS,
   CHANGE_SIGNALS,
+  REMOVE_LAST_SIGNAL,
   RESET_SIGNALS,
   SET_SIGNALS,
   SignalsActionTypes,
@@ -50,6 +51,12 @@ const signalsReducer = (
     case ADD_SIGNALS:
       newState = Object.fromEntries(
         Object.entries(state).map(([key, arr]) => [key, [...arr, 0]]),
+      ) as SignalsState;
+      SessionStorageService.saveSignals(newState);
+      return newState;
+    case REMOVE_LAST_SIGNAL:
+      newState = Object.fromEntries(
+        Object.entries(state).map(([key, arr]) => [key, arr.slice(0, -1)]),
       ) as SignalsState;
       SessionStorageService.saveSignals(newState);
       return newState;

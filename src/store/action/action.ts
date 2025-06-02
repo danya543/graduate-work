@@ -13,6 +13,8 @@ import {
   IncrementCounterAction,
   OPERATION,
   OperationAction,
+  REMOVE_LAST_SIGNAL,
+  RemoveLastSignalAction,
   RESET,
   RESET_ACC,
   RESET_COMMAND,
@@ -99,4 +101,7 @@ export const setSignals = (signals: {
   },
 });
 export const addSignals = (): AddSignalsAction => ({ type: ADD_SIGNALS });
+export const removeLastSignal = (): RemoveLastSignalAction => ({
+  type: REMOVE_LAST_SIGNAL,
+});
 export const resetSignals = (): ResetSignalsAction => ({ type: RESET_SIGNALS });

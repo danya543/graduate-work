@@ -29,6 +29,7 @@ export const StorageRegistr = ({
       <h1>{text}</h1>
       <p>{curValue && curValue.toString(16).padStart(2, '0')}</p>
       <p className={styles.data_bus}>{addresses.data_bus}</p>
+      <p className={styles.current}>{addresses.current}</p>
     </div>
   );
 };

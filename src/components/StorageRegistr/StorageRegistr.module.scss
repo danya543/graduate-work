@@ -36,5 +36,12 @@
       top: 0;
       left: 0;
     }
+
+    &.current {
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+      font-size: 10px;
+    }
   }
 }

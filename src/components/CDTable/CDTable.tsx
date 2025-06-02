@@ -2,7 +2,12 @@ import LocalStorageService from '@applicationStorage/LocalStorage';
 import SessionStorageService from '@applicationStorage/SessionStorage';
 import { areKeysEqual, generateSignalsFromBoxes } from '@components/constants';
 import { useLogicContext } from '@components/context/LogicContext';
-import { addSignals, changeSignal, setSignals } from '@store/action/action';
+import {
+  addSignals,
+  changeSignal,
+  removeLastSignal,
+  setSignals,
+} from '@store/action/action';
 import { AppDispatch, RootState } from '@store/store';
 import { Button } from '@utils/Button';
 import { useEffect, useRef } from 'react';
@@ -48,6 +53,13 @@ export const CDTable = ({
         onclick={() => {
           dispatch(addSignals());
         }}
+      />
+      <Button
+        text="удалить столбец"
+        onclick={() => {
+          dispatch(removeLastSignal());
+        }}
+        disabled={signals[keys[0]].length === 1}
       />
       <table className={styles.container}>
         <tbody>
