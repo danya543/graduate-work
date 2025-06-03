@@ -1,4 +1,3 @@
-// ControlDevicePreview.tsx
 import { useLogicContext } from '@components/context/LogicContext';
 import { RootState } from '@store/store';
 import { Button } from '@utils/Button';

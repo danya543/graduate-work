@@ -15,18 +15,20 @@ export interface DragableComponentsTypes {
   Storages: () => JSX.Element;
   StorageRegist: (props: {
     text: string;
-    addresses: { current: string; data_bus: string };
+    addresses: StorageRegister;
   }) => JSX.Element;
-  ALU: (props: {
+  GeneratorRegist: (props: {
     text: string;
-    ALU_addresses: { in1: string; in2: string; out: string };
+    generator_addresses: GeneratorRegister;
   }) => JSX.Element;
+  ALU: (props: { text: string; ALU_addresses: ALUBlock }) => JSX.Element;
 }
 
 export type ComponentProps = {
   text?: string;
-  addresses?: { current: string; data_bus: string };
-  ALU_addresses?: { in1: string; in2: string; out: string };
+  addresses?: StorageRegister;
+  generator_addresses?: GeneratorRegister;
+  ALU_addresses?: ALUBlock;
 };
 
 export interface Box {
@@ -35,7 +37,11 @@ export interface Box {
   type: DragableComponents;
   children: JSX.Element;
 }
-export type DragableComponents = 'Storages' | 'StorageRegist' | 'ALU';
+export type DragableComponents =
+  | 'Storages'
+  | 'StorageRegist'
+  | 'ALU'
+  | 'GeneratorRegist';
 export const ItemType = 'BOX';
 
 //hook
@@ -62,3 +68,17 @@ export interface UseDragAndDropAreaHook {
   isALU: boolean;
   setIsALU: Dispatch<SetStateAction<boolean>>;
 }
+
+export type ALUBlock = { in1: string; in2: string; out: string };
+
+export type GeneratorRegister = {
+  currentValue: number;
+  data_bus: string;
+};
+
+export type StorageRegister = {
+  current: string;
+  data_bus: string;
+};
+
+export type RegisterAddresses = GeneratorRegister | StorageRegister;

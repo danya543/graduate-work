@@ -1,4 +1,3 @@
-// LogicHandlerView.tsx
 import { CDTable } from '@components/CDTable/CDTable';
 import { useLogicContext } from '@components/context/LogicContext';
 import { Button } from '@utils/Button';

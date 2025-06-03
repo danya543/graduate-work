@@ -1,3 +1,4 @@
+import { RegisterAddresses } from '@src/types/DragAndDrop';
 import { REGEXP } from '@utils/constants';
 import { FormEvent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -8,13 +9,15 @@ export const NewRegister = (props: {
   onClose: () => void;
   addNewRegister: (
     name: string,
-    addresses: { current: string; data_bus: string },
+    addresses: RegisterAddresses,
+    isGenerator: boolean,
   ) => void;
 }) => {
   const { onClose, addNewRegister } = props;
 
   const [name, setName] = useState('');
   const [addresses, setAddresses] = useState({ current: '', data_bus: '' });
+  const [isGenerator, setIsGenerator] = useState(false);
 
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
@@ -52,7 +55,11 @@ export const NewRegister = (props: {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    addNewRegister(name, addresses);
+    const finalAddresses = isGenerator
+      ? { currentValue: 0, data_bus: addresses.data_bus }
+      : addresses;
+
+    addNewRegister(name, finalAddresses, isGenerator);
     onClose();
   };
 
@@ -63,6 +70,16 @@ export const NewRegister = (props: {
           &times;
         </button>
         <form onSubmit={submitHandler}>
+          <div className={`${styles.inputBlock} ${styles.checkBox}`}>
+            <label htmlFor="isGenerator">Генератор</label>
+            <input
+              id="isGenerator"
+              type="checkbox"
+              placeholder={'Генератор'}
+              checked={isGenerator}
+              onChange={() => setIsGenerator(prev => !prev)}
+            />
+          </div>
           <div className={styles.inputBlock}>
             <label htmlFor="name">Название регистра</label>
             <input
@@ -74,17 +91,19 @@ export const NewRegister = (props: {
               maxLength={5}
             />
           </div>
-          <div className={styles.inputBlock}>
-            <label htmlFor="ram_address">Адрес регистра</label>
-            <input
-              id="ram_address"
-              type="text"
-              placeholder={'Адрес регистра'}
-              value={addresses.current}
-              onChange={handleChangeAddress}
-              maxLength={3}
-            />
-          </div>
+          {!isGenerator && (
+            <div className={styles.inputBlock}>
+              <label htmlFor="ram_address">Адрес регистра</label>
+              <input
+                id="ram_address"
+                type="text"
+                placeholder={'Адрес регистра'}
+                value={addresses.current}
+                onChange={handleChangeAddress}
+                maxLength={3}
+              />
+            </div>
+          )}
           <div className={styles.inputBlock}>
             <label htmlFor="data_bus_address">Шина данных</label>
             <input
@@ -99,7 +118,11 @@ export const NewRegister = (props: {
           <input
             value={'Добавить'}
             type="submit"
-            disabled={!name || !addresses.current || !addresses.data_bus}
+            disabled={
+              !name ||
+              (!isGenerator && !addresses.current) ||
+              !addresses.data_bus
+            }
           />
         </form>
       </div>

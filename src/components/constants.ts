@@ -38,14 +38,17 @@ export const generateSignalsFromBoxes = (): SignalsState => {
   return Object.fromEntries([
     ...currentBoxes.flatMap(box => {
       if (box.type === 'Storages') {
-        return [
-          /* ['ROM_R', Array(1).fill(0)] */
-        ];
+        return [];
       }
 
       if (box.type === 'ALU' && 'props' in box.children) {
         const text = box.children.props.text;
         return [[`ALU_${text}_En`, Array(1).fill(0)]];
+      }
+
+      if (box.type === 'GeneratorRegist' && 'props' in box.children) {
+        const text = box.children.props.text;
+        return [[`gen_${text}_R`, Array(1).fill(0)]];
       }
 
       if (box.type === 'StorageRegist' && 'props' in box.children) {
@@ -59,6 +62,5 @@ export const generateSignalsFromBoxes = (): SignalsState => {
       return [[box.type, Array(1).fill(0)]];
     }),
     ['ADDER', Array(1).fill(0)],
-    ['PLUS_RAND', Array(1).fill(0)],
   ]);
 };

@@ -3,25 +3,38 @@ import { ModalType } from '@components/constants';
 import { ModalPortal } from '@components/ModalPortal/ModalPortal';
 import { NewALU } from '@components/ModalPortal/NewALU';
 import { NewRegister } from '@components/ModalPortal/NewRegister';
+import { GeneratorRegist } from '@components/StorageRegistr/GeneratorRegist';
 import { StorageRegistr } from '@components/StorageRegistr/StorageRegistr';
 import { Storages } from '@components/Storages/Storages';
 import { DraggableBox } from '@features/DragAndDrop/DragableBox';
 import { useDragAndDropArea } from '@hooks/useDragAndDropArea';
-import { DragableComponentsTypes } from '@src/types/DragAndDrop';
+import {
+  ALUBlock,
+  DragableComponentsTypes,
+  GeneratorRegister,
+  StorageRegister,
+} from '@src/types/DragAndDrop';
 import { Button } from '@utils/Button';
 
 import styles from './DragAndDropArea.module.scss';
 
 export const dragableComponents: DragableComponentsTypes = {
   Storages: () => <Storages />,
-  StorageRegist: (props: {
+  StorageRegist: (props: { text: string; addresses: StorageRegister }) => (
+    <StorageRegistr text={props.text} addresses={props.addresses} />
+  ),
+  GeneratorRegist: (props: {
     text: string;
-    addresses: { current: string; data_bus: string };
-  }) => <StorageRegistr text={props.text} addresses={props.addresses} />,
-  ALU: (props: {
-    text: string;
-    ALU_addresses: { in1: string; in2: string; out: string };
-  }) => <ALU text={props.text} ALU_addresses={props.ALU_addresses} />,
+    generator_addresses: GeneratorRegister;
+  }) => (
+    <GeneratorRegist
+      text={props.text}
+      generator_addresses={props.generator_addresses}
+    />
+  ),
+  ALU: (props: { text: string; ALU_addresses: ALUBlock }) => (
+    <ALU text={props.text} ALU_addresses={props.ALU_addresses} />
+  ),
 };
 
 export const DragAndDropArea = () => {
@@ -68,9 +81,20 @@ export const DragAndDropArea = () => {
         {isNew && (
           <NewRegister
             onClose={() => setIsNew(false)}
-            addNewRegister={(name, value) =>
-              addNewBox('StorageRegist', { text: name, addresses: value })
-            }
+            addNewRegister={(name, value) => {
+              if (!('current' in value)) {
+                const num = Math.floor(Math.random() * 100) + 1;
+                addNewBox('GeneratorRegist', {
+                  text: name,
+                  generator_addresses: { ...value, currentValue: num },
+                });
+              } else {
+                addNewBox('StorageRegist', {
+                  text: name,
+                  addresses: value,
+                });
+              }
+            }}
           />
         )}
         {isALU && (

@@ -1,3 +1,4 @@
+import { ALUBlock } from '@src/types/DragAndDrop';
 import { useEffect, useState } from 'react';
 
 import styles from './ALU.module.scss';
@@ -7,7 +8,7 @@ export const ALU = ({
   ALU_addresses,
 }: {
   text: string;
-  ALU_addresses: { in1: string; in2: string; out: string };
+  ALU_addresses: ALUBlock;
 }) => {
   const [, setForceUpdate] = useState(0);
 

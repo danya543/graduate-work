@@ -1,3 +1,4 @@
+import { ALUBlock } from '@src/types/DragAndDrop';
 import { REGEXP } from '@utils/constants';
 import { FormEvent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -6,10 +7,7 @@ import styles from './ModalPortal.module.scss';
 
 export const NewALU = (props: {
   onClose: () => void;
-  addNewALU: (
-    name: string,
-    ALU_addresses: { in1: string; in2: string; out: string },
-  ) => void;
+  addNewALU: (name: string, ALU_addresses: ALUBlock) => void;
 }) => {
   const { onClose, addNewALU } = props;
 

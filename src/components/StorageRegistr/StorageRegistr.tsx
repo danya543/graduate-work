@@ -1,3 +1,4 @@
+import { StorageRegister } from '@src/types/DragAndDrop';
 import { RootState } from '@store/store';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -9,7 +10,7 @@ export const StorageRegistr = ({
   addresses,
 }: {
   text: string;
-  addresses: { current: string; data_bus: string };
+  addresses: StorageRegister;
 }) => {
   const curValue = useSelector(
     (state: RootState) => state.storage.DataStorage[+addresses.current],

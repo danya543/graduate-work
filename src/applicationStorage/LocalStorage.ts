@@ -1,8 +1,11 @@
 import { dragableComponents } from '@components/DragAndDropArea/DragAndDropArea';
 import {
+  ALUBlock,
   Box,
   ComponentProps,
   DragableComponentsTypes,
+  GeneratorRegister,
+  StorageRegister,
 } from '@src/types/DragAndDrop';
 
 const LocalStorageService = {
@@ -23,14 +26,21 @@ const LocalStorageService = {
             return dragableComponents[type](
               props as {
                 text: string;
-                addresses: { current: string; data_bus: string };
+                addresses: StorageRegister;
+              },
+            );
+          case 'GeneratorRegist':
+            return dragableComponents[type](
+              props as {
+                text: string;
+                generator_addresses: GeneratorRegister;
               },
             );
           case 'ALU':
             return dragableComponents[type](
               props as {
                 text: string;
-                ALU_addresses: { in1: string; in2: string; out: string };
+                ALU_addresses: ALUBlock;
               },
             );
           default:

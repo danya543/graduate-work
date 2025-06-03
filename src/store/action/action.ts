@@ -49,7 +49,6 @@ export const ChangeDataStorage = (
 });
 export const AdderOperation = (
   operationType: 0 | 1,
-  extraSignal: 0 | 1,
   firstValueIndex: number,
   secondValueIndex: number,
   resultValueIndex: number,
@@ -60,7 +59,6 @@ export const AdderOperation = (
     firstValueIndex,
     secondValueIndex,
     resultValueIndex,
-    extraSignal,
   },
 });
 
