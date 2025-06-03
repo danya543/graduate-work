@@ -45,7 +45,7 @@ const storageReducer = (
         ${state.DataStorage[action.payload.firstValueIndex]} ${signType ? '+' : '-'}
         ${state.DataStorage[action.payload.secondValueIndex]} 
         ${action.payload.extraSignal ? '+' + (Math.floor(Math.random() * 100) + 1) : ''}`);
-      state.DataStorage.splice(action.payload.firstValueIndex, 1, result);
+      state.DataStorage.splice(action.payload.resultValueIndex, 1, result);
       newState = {
         ProgramStorage: state.ProgramStorage,
         DataStorage: state.DataStorage,

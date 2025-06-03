@@ -17,11 +17,16 @@ export interface DragableComponentsTypes {
     text: string;
     addresses: { current: string; data_bus: string };
   }) => JSX.Element;
+  ALU: (props: {
+    text: string;
+    ALU_addresses: { in1: string; in2: string; out: string };
+  }) => JSX.Element;
 }
 
 export type ComponentProps = {
   text?: string;
   addresses?: { current: string; data_bus: string };
+  ALU_addresses?: { in1: string; in2: string; out: string };
 };
 
 export interface Box {
@@ -30,7 +35,7 @@ export interface Box {
   type: DragableComponents;
   children: JSX.Element;
 }
-export type DragableComponents = 'Storages' | 'StorageRegist';
+export type DragableComponents = 'Storages' | 'StorageRegist' | 'ALU';
 export const ItemType = 'BOX';
 
 //hook
@@ -46,10 +51,7 @@ export interface UseDragAndDropAreaHook {
   handleTouchEnd: (event: React.TouchEvent) => void;
   addNewBox: (
     type: keyof DragableComponentsTypes,
-    props?: {
-      text?: string;
-      addresses?: { current: string; data_bus: string };
-    },
+    props?: ComponentProps,
   ) => void;
   deleteBox: (id: number) => void;
   handleClearArea: () => void;
@@ -57,4 +59,6 @@ export interface UseDragAndDropAreaHook {
   isStorage: boolean;
   isNew: boolean;
   setIsNew: Dispatch<SetStateAction<boolean>>;
+  isALU: boolean;
+  setIsALU: Dispatch<SetStateAction<boolean>>;
 }

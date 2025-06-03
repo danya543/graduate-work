@@ -1,4 +1,4 @@
-import { InputEnRegex } from '@utils/constants';
+import { REGEXP } from '@utils/constants';
 import { FormEvent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -18,7 +18,7 @@ export const NewRegister = (props: {
 
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    if (InputEnRegex.SaveInput.test(value) || value === '') setName(value);
+    if (REGEXP.InputEnRegex.test(value) || value === '') setName(value);
   };
   const handleChangeAddress = (e: { target: { value: string } }) => {
     const { value } = e.target;
@@ -93,7 +93,7 @@ export const NewRegister = (props: {
               placeholder={'Шина данных'}
               value={addresses.data_bus}
               onChange={handleChangeFromAddress}
-              maxLength={1}
+              maxLength={2}
             />
           </div>
           <input

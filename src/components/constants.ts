@@ -10,6 +10,7 @@ export const Images = {
 
 export const ERROR_MSG = {
   data_bus: 'Ошибка! Шины данных не совпадают',
+  signals: 'Ошибка! Поданы неверные значения сигналов',
 };
 
 export const LogoTypes = {
@@ -40,6 +41,11 @@ export const generateSignalsFromBoxes = (): SignalsState => {
         return [
           /* ['ROM_R', Array(1).fill(0)] */
         ];
+      }
+
+      if (box.type === 'ALU' && 'props' in box.children) {
+        const text = box.children.props.text;
+        return [[`ALU_${text}_En`, Array(1).fill(0)]];
       }
 
       if (box.type === 'StorageRegist' && 'props' in box.children) {

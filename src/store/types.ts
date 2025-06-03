@@ -11,6 +11,7 @@ export type OperationPayload = {
   extraSignal: 0 | 1;
   firstValueIndex: number;
   secondValueIndex: number;
+  resultValueIndex: number;
 };
 
 export interface ChangeProgramStorageAction {

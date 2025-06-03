@@ -26,6 +26,13 @@ const LocalStorageService = {
                 addresses: { current: string; data_bus: string };
               },
             );
+          case 'ALU':
+            return dragableComponents[type](
+              props as {
+                text: string;
+                ALU_addresses: { in1: string; in2: string; out: string };
+              },
+            );
           default:
             return dragableComponents[type]();
         }

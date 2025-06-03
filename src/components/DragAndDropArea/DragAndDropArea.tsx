@@ -1,5 +1,7 @@
+import { ALU } from '@components/ALU/ALU';
 import { ModalType } from '@components/constants';
 import { ModalPortal } from '@components/ModalPortal/ModalPortal';
+import { NewALU } from '@components/ModalPortal/NewALU';
 import { NewRegister } from '@components/ModalPortal/NewRegister';
 import { StorageRegistr } from '@components/StorageRegistr/StorageRegistr';
 import { Storages } from '@components/Storages/Storages';
@@ -16,6 +18,10 @@ export const dragableComponents: DragableComponentsTypes = {
     text: string;
     addresses: { current: string; data_bus: string };
   }) => <StorageRegistr text={props.text} addresses={props.addresses} />,
+  ALU: (props: {
+    text: string;
+    ALU_addresses: { in1: string; in2: string; out: string };
+  }) => <ALU text={props.text} ALU_addresses={props.ALU_addresses} />,
 };
 
 export const DragAndDropArea = () => {
@@ -36,6 +42,8 @@ export const DragAndDropArea = () => {
     isStorage,
     isNew,
     setIsNew,
+    isALU,
+    setIsALU,
   } = useDragAndDropArea();
 
   return (
@@ -52,11 +60,24 @@ export const DragAndDropArea = () => {
           onclick={() => setIsNew(true)}
           classname={styles.addBtn}
         />
+        <Button
+          text={'Добавить АЛУ'}
+          onclick={() => setIsALU(true)}
+          classname={styles.addBtn}
+        />
         {isNew && (
           <NewRegister
             onClose={() => setIsNew(false)}
             addNewRegister={(name, value) =>
               addNewBox('StorageRegist', { text: name, addresses: value })
+            }
+          />
+        )}
+        {isALU && (
+          <NewALU
+            onClose={() => setIsALU(false)}
+            addNewALU={(name, value) =>
+              addNewBox('ALU', { text: name, ALU_addresses: value })
             }
           />
         )}

@@ -1,7 +1,7 @@
 import LocalStorageService from '@applicationStorage/LocalStorage';
 import { ModalType } from '@components/constants';
 import { ModalProps } from '@src/types/Modal';
-import { InputRegex } from '@utils/constants';
+import { REGEXP } from '@utils/constants';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
@@ -21,7 +21,7 @@ export const Modal = (props: ModalProps) => {
 
   const validationSchema = Yup.object({
     configName: Yup.string()
-      .matches(InputRegex.SaveInput, 'Недопустимые символы')
+      .matches(REGEXP.InputRegex, 'Недопустимые символы')
       .required('Обязательное поле')
       .notOneOf(parsedKeys, 'Конфигурация с таким именем уже существует'),
   });

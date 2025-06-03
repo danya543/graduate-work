@@ -52,9 +52,16 @@ export const AdderOperation = (
   extraSignal: 0 | 1,
   firstValueIndex: number,
   secondValueIndex: number,
+  resultValueIndex: number,
 ): OperationAction => ({
   type: OPERATION,
-  payload: { operationType, firstValueIndex, secondValueIndex, extraSignal },
+  payload: {
+    operationType,
+    firstValueIndex,
+    secondValueIndex,
+    resultValueIndex,
+    extraSignal,
+  },
 });
 
 //counter

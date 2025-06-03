@@ -99,6 +99,13 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
               addresses: { current: string; data_bus: string };
             },
           );
+        case 'ALU':
+          return dragableComponents[type](
+            props as {
+              text: string;
+              ALU_addresses: { in1: string; in2: string; out: string };
+            },
+          );
         default:
           return dragableComponents[type]();
       }
@@ -123,6 +130,7 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
 
   const isStorage = !boxes.some(box => box.type === 'Storages');
   const [isNew, setIsNew] = useState(false);
+  const [isALU, setIsALU] = useState(false);
 
   return {
     boxes,
@@ -141,5 +149,7 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
     isStorage,
     isNew,
     setIsNew,
+    isALU,
+    setIsALU,
   };
 };
