@@ -50,12 +50,14 @@
          }
       }
       input{
-        text-transform: capitalize;
         border-radius: 10px;
         padding: 5px;
         border: 1px solid #ccc;
         color: #747474;
         outline: none;
+        &.error{
+          border-color: red;
+        }
       }
       input[type='submit'] {
         cursor: pointer;

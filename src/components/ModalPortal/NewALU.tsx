@@ -1,3 +1,4 @@
+import LocalStorageService from '@applicationStorage/LocalStorage';
 import { ALUBlock } from '@src/types/DragAndDrop';
 import { REGEXP } from '@utils/constants';
 import { FormEvent, useEffect, useState } from 'react';
@@ -14,38 +15,67 @@ export const NewALU = (props: {
   const [name, setName] = useState('');
   const [addresses, setAddresses] = useState({ in1: '', in2: '', out: '' });
 
+  const boxes = LocalStorageService.loadBoxes('last_work');
+  const ALUs = boxes.filter(el => el.type === 'ALU');
+
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    if (REGEXP.InputEnRegex.test(value) || value === '') setName(value);
+    const isEqualName = ALUs.some(el => el.children.props.text === value);
+    if (REGEXP.InputEnRegex.test(value) || value === '') {
+      if (isEqualName) {
+        document.getElementById('name')?.classList.add(styles.error);
+      } else {
+        document.getElementById('name')?.classList.remove(styles.error);
+      }
+      setName(value);
+    }
   };
   const handleChangeInBus1 = (e: { target: { value: string } }) => {
     const { value } = e.target;
 
-    if (value && value != addresses.out) {
+    if (value || value === '') {
+      if (value != addresses.out) {
+        document
+          .getElementById('data_bus_address_in1')
+          ?.classList.remove(styles.error);
+      } else {
+        document
+          .getElementById('data_bus_address_in1')
+          ?.classList.add(styles.error);
+      }
       setAddresses(prev => ({ ...prev, in1: value }));
-    }
-    if (value === '') {
-      setAddresses(prev => ({ ...prev, in1: '' }));
     }
   };
   const handleChangeInBus2 = (e: { target: { value: string } }) => {
     const { value } = e.target;
 
-    if (value && value != addresses.out) {
+    if (value || value === '') {
+      if (value != addresses.out) {
+        document
+          .getElementById('data_bus_address_in2')
+          ?.classList.remove(styles.error);
+      } else {
+        document
+          .getElementById('data_bus_address_in2')
+          ?.classList.add(styles.error);
+      }
       setAddresses(prev => ({ ...prev, in2: value }));
-    }
-    if (value === '') {
-      setAddresses(prev => ({ ...prev, in2: '' }));
     }
   };
   const handleChangeOutBus = (e: { target: { value: string } }) => {
     const { value } = e.target;
 
-    if (value && value != addresses.in1 && value != addresses.in2) {
+    if (value || value === '') {
+      if (value != addresses.in1 && value != addresses.in2) {
+        document
+          .getElementById('data_bus_address_out')
+          ?.classList.remove(styles.error);
+      } else {
+        document
+          .getElementById('data_bus_address_out')
+          ?.classList.add(styles.error);
+      }
       setAddresses(prev => ({ ...prev, out: value }));
-    }
-    if (value === '') {
-      setAddresses(prev => ({ ...prev, out: '' }));
     }
   };
 
@@ -63,6 +93,17 @@ export const NewALU = (props: {
     addNewALU(name, addresses);
     onClose();
   };
+
+  const isErrorClass = ![...document.getElementsByTagName('input')].some(el =>
+    el.classList.contains(styles.error),
+  );
+
+  const isDisabled =
+    !name ||
+    !addresses.in1 ||
+    !addresses.in2 ||
+    !addresses.out ||
+    !isErrorClass;
 
   return ReactDOM.createPortal(
     <div className={styles.modal_overlay}>
@@ -119,13 +160,7 @@ export const NewALU = (props: {
               maxLength={2}
             />
           </div>
-          <input
-            value={'Добавить'}
-            type="submit"
-            disabled={
-              !name || !addresses.in1 || !addresses.in2 || !addresses.out
-            }
-          />
+          <input value={'Добавить'} type="submit" disabled={isDisabled} />
         </form>
       </div>
     </div>,
