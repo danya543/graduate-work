@@ -1,8 +1,17 @@
+import { SignalsStateKeys } from '@src/types/Signals';
+
 //storages
 export const CHANGE_PROGRAMSTORAGE = 'CHANGE_PROGRAMSTORAGE';
 export const CHANGE_DATASTORAGE = 'CHANGE_DATASTORAGE';
+export const OPERATION = 'OPERATION';
 
 export type ChangeStoragePayload = { index: number; newValue: number };
+export type OperationPayload = {
+  operationType: 0 | 1;
+  firstValueIndex: number;
+  secondValueIndex: number;
+  resultValueIndex: number;
+};
 
 export interface ChangeProgramStorageAction {
   type: typeof CHANGE_PROGRAMSTORAGE;
@@ -16,9 +25,15 @@ export interface ChangeDataStorageAction {
   [key: string]: unknown;
 }
 
+export interface OperationAction {
+  type: typeof OPERATION;
+  payload: OperationPayload;
+}
+
 export type StorageActionTypes =
   | ChangeProgramStorageAction
-  | ChangeDataStorageAction;
+  | ChangeDataStorageAction
+  | OperationAction;
 
 //pc counter
 export const INCREMENT = 'INCREMENT';
@@ -51,21 +66,6 @@ export interface ResetAccAction {
 
 export type AccActionTypes = SetAccAction | ResetAccAction;
 
-//temp
-export const SET_TEMP = 'SET_TEMP';
-export const RESET_TEMP = 'RESET_TEMP';
-
-export interface SetTempAction {
-  type: typeof SET_TEMP;
-  payload: StorageRegistrPayload;
-}
-
-export interface ResetTempAction {
-  type: typeof RESET_TEMP;
-}
-
-export type TempActionTypes = SetTempAction | ResetTempAction;
-
 //command
 export const SET_COMMAND = 'SET_COMMAND';
 export const RESET_COMMAND = 'RESET_COMMAND';
@@ -85,10 +85,45 @@ export interface ResetCommandAction {
 
 export type CommandActionTypes = SetCommandAction | ResetCommandAction;
 
+//signals
+export const CHANGE_SIGNALS = 'CHANGE_SIGNALS';
+export const RESET_SIGNALS = 'RESET_SIGNALS';
+export const SET_SIGNALS = 'SET_SIGNALS';
+export const ADD_SIGNALS = 'ADD_SIGNALS';
+export const REMOVE_LAST_SIGNAL = 'REMOVE_LAST_SIGNAL';
+
+export interface ChangeSignalsAction {
+  type: typeof CHANGE_SIGNALS;
+  payload: { signal: SignalsStateKeys; index: number };
+}
+export interface SetSignalsAction {
+  type: typeof SET_SIGNALS;
+  payload: {
+    signals: {
+      [K in SignalsStateKeys]: (0 | 1)[];
+    };
+  };
+}
+export interface AddSignalsAction {
+  type: typeof ADD_SIGNALS;
+}
+export interface RemoveLastSignalAction {
+  type: typeof REMOVE_LAST_SIGNAL;
+}
+export interface ResetSignalsAction {
+  type: typeof RESET_SIGNALS;
+}
+export type SignalsActionTypes =
+  | ChangeSignalsAction
+  | ResetSignalsAction
+  | SetSignalsAction
+  | AddSignalsAction
+  | RemoveLastSignalAction;
+
 //all types
 export type AppAction =
   | StorageActionTypes
   | CounterActionTypes
   | AccActionTypes
-  | TempActionTypes
-  | CommandActionTypes;
+  | CommandActionTypes
+  | SignalsActionTypes;

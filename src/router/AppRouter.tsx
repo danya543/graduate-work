@@ -1,6 +1,7 @@
 import { ErrorPage } from '@pages/ErrorPage/ErrorPage';
 import { MainLayout } from '@pages/MainLayout/MainLayout';
 import { MainPage } from '@pages/MainPage/MainPage';
+import { MobilePage } from '@pages/Mobile/MobilePage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const routerSchema = createBrowserRouter([
@@ -11,6 +12,10 @@ const routerSchema = createBrowserRouter([
       {
         index: true,
         element: <MainPage />,
+      },
+      {
+        path: 'mobile',
+        element: <MobilePage />,
       },
     ],
   },

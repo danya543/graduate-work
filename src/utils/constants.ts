@@ -9,11 +9,10 @@ export const NumberSystem = {
   Hex: 'hex',
 };
 
-export const NumberSystemRegex = {
-  Bin: /^[0-1]+$/,
-  Hex: /^[A-Fa-f0-9]+$/,
-};
-
-export const InputRegex = {
-  SaveInput: /^[A-ZА-Яa-zа-я0-9_-]+$/,
+export const REGEXP = {
+  InputEnRegex: /^[A-Za-z0-9]+$/,
+  InputRegex: /^[A-ZА-Яa-zа-я0-9_-]+$/,
+  BinNumberSystem: /^[0-1]+$/,
+  HexNumberSystem: /^[A-Fa-f0-9]+$/,
+  isALU: /^ALU_.+_En$/,
 };

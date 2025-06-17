@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { InputTypes, NumberSystem, NumberSystemRegex } from './constants';
+import { InputTypes, NumberSystem, REGEXP } from './constants';
 import { Input } from './Input';
 
 export const Form = ({
@@ -12,7 +12,7 @@ export const Form = ({
 }) => {
   const [numSystem, setNumSystem] = useState(NumberSystem.Bin);
   const [inputValue, setInputValue] = useState('');
-  const [regex, setRegex] = useState(NumberSystemRegex.Bin);
+  const [regex, setRegex] = useState(REGEXP.BinNumberSystem);
 
   const handleChangeNumSystem = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -26,9 +26,9 @@ export const Form = ({
       prev === NumberSystem.Bin ? NumberSystem.Hex : NumberSystem.Bin,
     );
     setRegex(prev =>
-      prev === NumberSystemRegex.Bin
-        ? NumberSystemRegex.Hex
-        : NumberSystemRegex.Bin,
+      prev === REGEXP.BinNumberSystem
+        ? REGEXP.HexNumberSystem
+        : REGEXP.BinNumberSystem,
     );
   };
 

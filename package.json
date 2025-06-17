@@ -20,7 +20,7 @@
     "*.{ts,tsx,json,css,scss,md}": [
       "eslint --fix",
       "prettier --write",
-      "git add"
+      "git add ."
     ]
   },
   "dependencies": {
@@ -37,6 +37,8 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "rollup": "^3.29.4",
+    "@rollup/rollup-linux-x64-gnu": "^3.29.4",
     "@types/node": "^22.7.8",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
@@ -50,7 +52,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "ts-node": "^10.9.2",

@@ -1,0 +1,53 @@
+.container {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+
+  th {
+    width: 100px;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    position: relative;
+  }
+
+  td {
+    text-align: center;
+    position: relative;
+
+    &.highlighted {
+      background-color: #d1eaff;
+      border-radius: 10px;
+    }
+  }
+
+  thead {
+    th {
+      background-color: #f5f5f5;
+      font-weight: 500;
+      border-bottom: 2px solid #ddd;
+    }
+  }
+
+  tbody {
+    position: relative;
+    tr {
+      &:not(:first-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        background-color: #e0e0e0;
+        z-index: 1;
+      }
+
+      &:last-child {
+        th {
+          border-bottom: none;
+        }
+      }
+    }
+
+  }
+}

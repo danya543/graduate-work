@@ -1,13 +1,15 @@
-import { CommandInput } from '@components/CommandInput/CommandInput';
-import { PC } from '@components/PC/PC';
+//import { CommandInput } from '@components/CommandInput/CommandInput';
+import { ControlDevice } from '@components/ControlDevice/ControlDevice';
+import { ControlDevicePreview } from '@components/ControlDevice/ControlDevicePreview';
 
 import styles from './DragHeader.module.scss';
 
 export const DragHeader = () => {
   return (
     <div className={styles.container}>
-      <CommandInput />
-      <PC />
+      {/* <CommandInput /> */}
+      <ControlDevicePreview />
+      <ControlDevice />
     </div>
   );
 };

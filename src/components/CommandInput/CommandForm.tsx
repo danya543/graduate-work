@@ -1,4 +1,4 @@
-import { InputTypes, NumberSystemRegex } from '@utils/constants';
+import { InputTypes, REGEXP } from '@utils/constants';
 import { Input } from '@utils/Input';
 
 import styles from './CommandInput.module.scss';
@@ -18,7 +18,7 @@ export const CommandForm = ({
     const value = e.target.value;
     if (value.startsWith('0x') && value.length <= 4) {
       const hexValue = value.slice(2);
-      if (NumberSystemRegex.Hex.test(hexValue) || hexValue === '') {
+      if (REGEXP.HexNumberSystem.test(hexValue) || hexValue === '') {
         setCommandNum(value);
       }
     }

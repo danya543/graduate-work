@@ -1,18 +1,40 @@
-import { ModalType, StorageRegistrTypes } from '@components/constants';
+import { ALU } from '@components/ALU/ALU';
+import { ModalType } from '@components/constants';
 import { ModalPortal } from '@components/ModalPortal/ModalPortal';
+import { NewALU } from '@components/ModalPortal/NewALU';
+import { NewRegister } from '@components/ModalPortal/NewRegister';
+import { GeneratorRegist } from '@components/StorageRegistr/GeneratorRegist';
 import { StorageRegistr } from '@components/StorageRegistr/StorageRegistr';
 import { Storages } from '@components/Storages/Storages';
 import { DraggableBox } from '@features/DragAndDrop/DragableBox';
 import { useDragAndDropArea } from '@hooks/useDragAndDropArea';
-import { DragableComponentsTypes } from '@src/types/DragAndDrop';
+import {
+  ALUBlock,
+  DragableComponentsTypes,
+  GeneratorRegister,
+  StorageRegister,
+} from '@src/types/DragAndDrop';
 import { Button } from '@utils/Button';
 
 import styles from './DragAndDropArea.module.scss';
 
 export const dragableComponents: DragableComponentsTypes = {
   Storages: () => <Storages />,
-  StorageRegistrAcc: () => <StorageRegistr text={StorageRegistrTypes.ACC} />,
-  StorageRegistrTemp: () => <StorageRegistr text={StorageRegistrTypes.RVH} />,
+  StorageRegist: (props: { text: string; addresses: StorageRegister }) => (
+    <StorageRegistr text={props.text} addresses={props.addresses} />
+  ),
+  GeneratorRegist: (props: {
+    text: string;
+    generator_addresses: GeneratorRegister;
+  }) => (
+    <GeneratorRegist
+      text={props.text}
+      generator_addresses={props.generator_addresses}
+    />
+  ),
+  ALU: (props: { text: string; ALU_addresses: ALUBlock }) => (
+    <ALU text={props.text} ALU_addresses={props.ALU_addresses} />
+  ),
 };
 
 export const DragAndDropArea = () => {
@@ -30,9 +52,11 @@ export const DragAndDropArea = () => {
     addNewBox,
     deleteBox,
     handleClearArea,
-    isAcc,
-    isTemp,
     isStorage,
+    isNew,
+    setIsNew,
+    isALU,
+    setIsALU,
   } = useDragAndDropArea();
 
   return (
@@ -44,34 +68,50 @@ export const DragAndDropArea = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}>
       <div className={styles.header}>
-        <div className={styles.addComponents}>
-          {isAcc && (
-            <Button
-              text={'ACC'}
-              onclick={() => addNewBox('StorageRegistrAcc')}
-              classname={styles.addBtn}
-            />
-          )}
-          {isTemp && (
-            <Button
-              text={'RVH'}
-              onclick={() => addNewBox('StorageRegistrTemp')}
-              classname={styles.addBtn}
-            />
-          )}
-          {isStorage && (
-            <Button
-              text={'Storages'}
-              onclick={() => addNewBox('Storages')}
-              classname={styles.addBtn}
-            />
-          )}
-        </div>
-        {/* <Button
-          text={'Компоненты'}
-          classname={styles.showBtns}
-          onclick={handleMainButtonClick}
-        /> */}
+        <Button
+          text={'Добавить регистр'}
+          onclick={() => setIsNew(true)}
+          classname={styles.addBtn}
+        />
+        <Button
+          text={'Добавить АЛУ'}
+          onclick={() => setIsALU(true)}
+          classname={styles.addBtn}
+        />
+        {isNew && (
+          <NewRegister
+            onClose={() => setIsNew(false)}
+            addNewRegister={(name, value) => {
+              if (!('current' in value)) {
+                const num = Math.floor(Math.random() * 100) + 1;
+                addNewBox('GeneratorRegist', {
+                  text: name,
+                  generator_addresses: { ...value, currentValue: num },
+                });
+              } else {
+                addNewBox('StorageRegist', {
+                  text: name,
+                  addresses: value,
+                });
+              }
+            }}
+          />
+        )}
+        {isALU && (
+          <NewALU
+            onClose={() => setIsALU(false)}
+            addNewALU={(name, value) =>
+              addNewBox('ALU', { text: name, ALU_addresses: value })
+            }
+          />
+        )}
+        {isStorage && (
+          <Button
+            text={'Добавить память'}
+            onclick={() => addNewBox('Storages')}
+            classname={styles.addBtn}
+          />
+        )}
         <Button
           onclick={() => openModal('save')}
           text={'Сохранить'}

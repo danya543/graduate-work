@@ -34,5 +34,12 @@
     &:hover {
       background: $primary-gray-color;
     }
+
+    input {
+      width: 100%;
+      outline: none;
+      background: transparent;
+      border: none;
+    }
   }
 }

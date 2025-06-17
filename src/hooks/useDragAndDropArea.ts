@@ -1,12 +1,17 @@
+import LocalStorageService from '@applicationStorage/LocalStorage';
 import { dragableComponents } from '@components/DragAndDropArea/DragAndDropArea';
 import {
+  ALUBlock,
   Box,
+  ComponentProps,
   DragableComponentsTypes,
+  GeneratorRegister,
   ItemType,
+  StorageRegister,
   UseDragAndDropAreaHook,
 } from '@src/types/DragAndDrop';
 import { ModalTypes } from '@src/types/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 
 export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
@@ -15,6 +20,15 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
 
   const openModal = (type: ModalTypes) => setModalType(type);
   const closeModal = () => setModalType(null);
+
+  useEffect(() => {
+    LocalStorageService.saveBoxes('last_work', boxes);
+  }, [boxes]);
+
+  useEffect(() => {
+    const savedBoxes = LocalStorageService.loadBoxes('last_work');
+    if (savedBoxes) setBoxes(savedBoxes);
+  }, []);
 
   const [, drop] = useDrop(() => ({
     accept: ItemType,
@@ -75,14 +89,45 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
     console.log(event);
   };
 
-  const addNewBox = (type: keyof DragableComponentsTypes) => {
+  const addNewBox = (
+    type: keyof DragableComponentsTypes,
+    props?: ComponentProps,
+  ) => {
+    const createElement = () => {
+      switch (type) {
+        case 'StorageRegist':
+          return dragableComponents[type](
+            props as {
+              text: string;
+              addresses: StorageRegister;
+            },
+          );
+        case 'GeneratorRegist':
+          return dragableComponents[type](
+            props as {
+              text: string;
+              generator_addresses: GeneratorRegister;
+            },
+          );
+        case 'ALU':
+          return dragableComponents[type](
+            props as {
+              text: string;
+              ALU_addresses: ALUBlock;
+            },
+          );
+        default:
+          return dragableComponents[type]();
+      }
+    };
+
     setBoxes(prevBoxes => [
       ...prevBoxes,
       {
         top: 20,
         left: 20,
         type,
-        children: dragableComponents[type](),
+        children: createElement(),
       },
     ]);
   };
@@ -93,9 +138,9 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
 
   const handleClearArea = () => setBoxes([]);
 
-  const isAcc = !boxes.some(box => box.type === 'StorageRegistrAcc');
-  const isTemp = !boxes.some(box => box.type === 'StorageRegistrTemp');
   const isStorage = !boxes.some(box => box.type === 'Storages');
+  const [isNew, setIsNew] = useState(false);
+  const [isALU, setIsALU] = useState(false);
 
   return {
     boxes,
@@ -111,8 +156,10 @@ export const useDragAndDropArea = (): UseDragAndDropAreaHook => {
     addNewBox,
     deleteBox,
     handleClearArea,
-    isAcc,
-    isTemp,
     isStorage,
+    isNew,
+    setIsNew,
+    isALU,
+    setIsALU,
   };
 };

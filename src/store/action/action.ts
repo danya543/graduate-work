@@ -1,25 +1,34 @@
+import { SignalsStateKeys } from '@src/types/Signals';
 import {
+  ADD_SIGNALS,
+  AddSignalsAction,
   CHANGE_DATASTORAGE,
   CHANGE_PROGRAMSTORAGE,
+  CHANGE_SIGNALS,
   ChangeDataStorageAction,
   ChangeProgramStorageAction,
+  ChangeSignalsAction,
   CommandPayload,
   INCREMENT,
   IncrementCounterAction,
+  OPERATION,
+  OperationAction,
+  REMOVE_LAST_SIGNAL,
+  RemoveLastSignalAction,
   RESET,
   RESET_ACC,
   RESET_COMMAND,
-  RESET_TEMP,
+  RESET_SIGNALS,
   ResetAccAction,
   ResetCommandAction,
   ResetCounterAction,
-  ResetTempAction,
+  ResetSignalsAction,
   SET_ACC,
   SET_COMMAND,
-  SET_TEMP,
+  SET_SIGNALS,
   SetAccAction,
   SetCommandAction,
-  SetTempAction,
+  SetSignalsAction,
 } from '@store/types';
 
 //storages
@@ -38,6 +47,20 @@ export const ChangeDataStorage = (
   type: CHANGE_DATASTORAGE,
   payload: { index, newValue },
 });
+export const AdderOperation = (
+  operationType: 0 | 1,
+  firstValueIndex: number,
+  secondValueIndex: number,
+  resultValueIndex: number,
+): OperationAction => ({
+  type: OPERATION,
+  payload: {
+    operationType,
+    firstValueIndex,
+    secondValueIndex,
+    resultValueIndex,
+  },
+});
 
 //counter
 export const increment = (): IncrementCounterAction => ({ type: INCREMENT });
@@ -52,16 +75,6 @@ export const setAccValue = (newValue: number): SetAccAction => ({
 });
 export const resetAccValue = (): ResetAccAction => ({ type: RESET_ACC });
 
-//temp
-export const setTempValue = (newValue: number): SetTempAction => ({
-  type: SET_TEMP,
-  payload: {
-    newValue,
-  },
-});
-
-export const resetTempValue = (): ResetTempAction => ({ type: RESET_TEMP });
-
 //command
 export const setCommand = (newValue: CommandPayload): SetCommandAction => ({
   type: SET_COMMAND,
@@ -72,3 +85,29 @@ export const setCommand = (newValue: CommandPayload): SetCommandAction => ({
 });
 
 export const resetCommand = (): ResetCommandAction => ({ type: RESET_COMMAND });
+
+//signals
+export const changeSignal = (
+  signal: SignalsStateKeys,
+  index: number,
+): ChangeSignalsAction => ({
+  type: CHANGE_SIGNALS,
+  payload: {
+    signal: signal,
+    index: index,
+  },
+});
+
+export const setSignals = (signals: {
+  [K in SignalsStateKeys]: (0 | 1)[];
+}): SetSignalsAction => ({
+  type: SET_SIGNALS,
+  payload: {
+    signals: signals,
+  },
+});
+export const addSignals = (): AddSignalsAction => ({ type: ADD_SIGNALS });
+export const removeLastSignal = (): RemoveLastSignalAction => ({
+  type: REMOVE_LAST_SIGNAL,
+});
+export const resetSignals = (): ResetSignalsAction => ({ type: RESET_SIGNALS });
